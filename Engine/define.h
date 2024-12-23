@@ -11,6 +11,16 @@ private:\
 	type();\
 	~type();\
 
+// Object 클래스들은 시작전 Class로 등록되기 위해
+#define GENERATED_BODY(Type, BaseType)\
+public:\
+static Class* StaticClass() { return staticClass;}\
+static inline Class* staticClass = \
+	RegisterEngineClass(L#Type);\
+private:\
+	using ThisClass = Type;\
+	using Super = BaseType;\
+
 #define DT TimeManager::GetInst()->GetDT()
 #define fDT TimeManager::GetInst()->GetDT()
 
@@ -46,4 +56,12 @@ enum class SCENE_TYPE
 
 
 	END
+};
+
+
+enum EObjectFlags
+{
+	RF_NoFlags = 0x00000000,
+	RF_ClassDefaultObject = 0x00000010,
+	RF_Class = 0x00000020
 };
