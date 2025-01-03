@@ -16,12 +16,12 @@ void Missile::Update()
 {
 	Vec2 vPos = GetPos();
 
-    // ìœ„ë¡œ ê°ˆìˆ˜ë¡ yê°€ í”ŒëŸ¬ìŠ¤ì¸ ì¢Œí‘œê³„ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ê°ë„ë¥¼ ë°›ì•˜ê¸° ë•Œë¬¸ì—
-    // yëŠ” ì—­ìˆ˜ë¡œ ë”í•´ì£¼ê¸°
+    // À§·Î °¥¼ö·Ï y°¡ ÇÃ·¯½ºÀÎ ÁÂÇ¥°è¸¦ ±âÁØÀ¸·Î °¢µµ¸¦ ¹Þ¾Ò±â ¶§¹®¿¡
+    // y´Â ¿ª¼ö·Î ´õÇØÁÖ±â
 	//vPos.x += 200.f * fDT * cosf(m_fTheta);
     //vPos.y -= 200.f * fDT * sinf(m_fTheta);
 
-    // ì •ê·œí™”ê°€ ëœ ë°©í–¥ë²¡í„°ì´ê¸° ë•Œë¬¸ì—, xëŠ” cos, yëŠ” sin
+    // Á¤±ÔÈ­°¡ µÈ ¹æÇâº¤ÅÍÀÌ±â ¶§¹®¿¡, x´Â cos, y´Â sin
     vPos.x += 100.f * fDT * dir.x;
     vPos.y += 100.f * fDT * dir.y;
 	SetPos(vPos);

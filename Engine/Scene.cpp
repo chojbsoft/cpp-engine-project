@@ -27,7 +27,7 @@ Scene::Scene()
 {
 	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
 	{
-		objs[i] = vector<Object*>(); // ê° ê·¸ë£¹ì˜ ë²¡í„° ì´ˆê¸°í™”
+		objs[i] = vector<Object*>(); // °¢ ±×·ìÀÇ º¤ÅÍ ÃÊ±âÈ­
 	}
 }
 

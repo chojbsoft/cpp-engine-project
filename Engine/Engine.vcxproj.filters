@@ -135,9 +135,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include=".editorconfig" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="Engine.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
