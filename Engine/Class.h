@@ -1,42 +1,57 @@
 #pragma once
 #include "Object.h"
+#include "ObjectArray.h"
 
 class Class : public ObjectBase
 {
 public:
-	Class() = default;
+	Class() = delete;
+	Class(const type_info& InClassTypeInfo, const size_t InClassSize)
+		: typeInfo(InClassTypeInfo), classSize(InClassSize)
+	{ }
 
 public:
-	void CreateDefaultObject();
-	Object* GetDefaultObject(){ return classDefaultObject; }
+	template <class T>
+	void CreateDefaultObject()
+	{
+		const int SharedPtrSize = sizeof(_Ref_count_obj_alloc3 <Object
+			, Allocator<Object>>) - sizeof(Object);
+
+		GObjectArray.Create(typeInfo, SharedPtrSize + classSize);
+
+		ObjectInitializer objectInitializer(this);
+
+		objectInitializer.SharedObj = allocate_shared<T>(Allocator<T>(&objectInitializer));
+		classDefaultObject = objectInitializer.SharedObj.get();
+	}
+
+	Object* GetDefaultObject() { return classDefaultObject; }
 
 public:
 	wstring className;
+	const type_info& typeInfo;
+	size_t classSize;
 
 private:
 	Class* superClass;
 	Object* classDefaultObject;
-
 };
 
 extern map<wstring, Class*> g_mapClass;
 
+template<class T>
 inline Class* RegisterEngineClass(wstring InClassName)
 {
-	// 메모리 할당
 	ObjectBase* objectBase = (ObjectBase*)malloc(sizeof(Class));
 
-	// UObjectBase 할당
 	new(objectBase)ObjectBase(nullptr, EObjectFlags::RF_Class, nullptr);
 
-	// UObjectBase의 기본생성자는 비워뒀기 때문에 한번더 Placement New로 생성해도됨
-	Class* NewClass = new(objectBase)Class();
+	Class* NewClass = new(objectBase)Class(typeid(T), sizeof(T));
 
 	NewClass->className = InClassName;
 	g_mapClass.insert({ InClassName, NewClass });
 
-	// CDO 생성
-	NewClass->CreateDefaultObject();
+	NewClass->CreateDefaultObject<T>();
 
 	return NewClass;
 }

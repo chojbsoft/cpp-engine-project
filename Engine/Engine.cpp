@@ -37,10 +37,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		return FALSE;
 	}
 
-	// CCore 초기화
 	if (FAILED(Core::GetInst()->Init(g_hwnd, POINT{ 1280, 760 })))
 	{
-		MessageBox(nullptr, L"Core 객체 초기화 실패"
+		MessageBox(nullptr, L"Core Failed"
 			, L"ERROR", MB_OK);
 
 		return FALSE;
@@ -68,10 +67,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			}
 		}
 
-		// 메시지가 발생하지 않는 대부분의 시간
 		else
 		{
-			// Window Core Tick 실행
 			Core::GetInst()->Progress();
 		}
 	}

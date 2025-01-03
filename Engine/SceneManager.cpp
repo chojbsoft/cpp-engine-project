@@ -4,11 +4,11 @@
 
 void SceneManager::Init()
 {
-	// Scene »ı¼º
+	// Scene ìƒì„±
 	scenes[(UINT)SCENE_TYPE::START] = new StartScene();
 	scenes[(UINT)SCENE_TYPE::START]->SetName(L"Start Scene");
 
-	// ÇöÀç ¾À ÁöÁ¤
+	// í˜„ì¬ ì”¬ ì§€ì •
 	curScene = scenes[(UINT)SCENE_TYPE::START];
 	curScene->Enter();
 }

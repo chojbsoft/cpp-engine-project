@@ -1,7 +1,11 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Monster.h"
 #include "TimeManager.h"
 
+
+Monster::Monster()
+{
+}
 
 void Monster::Update()
 {

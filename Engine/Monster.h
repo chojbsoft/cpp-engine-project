@@ -1,8 +1,11 @@
-#pragma once
+﻿#pragma once
 #include "Object.h"
 
 class Monster : public Object
 {
+public:
+	Monster();
+
 private:
 	Vec2 _centerPos = Vec2{ 0, 0 };
 	float speed = 100.f;

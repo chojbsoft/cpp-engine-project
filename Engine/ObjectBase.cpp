@@ -1,2 +1,8 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "ObjectBase.h"
+
+
+ObjectBase::ObjectBase()
+{
+
+}
