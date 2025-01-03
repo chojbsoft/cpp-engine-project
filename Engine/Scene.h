@@ -34,6 +34,7 @@ public:
 	virtual void Exit() = 0;
 
 	void Render(HDC _dc);
+	void Update();
 
 
 };
