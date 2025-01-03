@@ -15,4 +15,5 @@ using namespace std;
 
 #include <boost/pool/pool.hpp>
 
-//#include "Class.h"
+#include "Object.h"
+#include "Class.h"
