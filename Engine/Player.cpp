@@ -51,7 +51,6 @@ void Player::CreateMissile()
     pMissile->SetScale(Vec2(25.f, 25.f));
     pMissile->SetDir(PI);
 
-    // 대략 -1갈 때 -7정도로 가는 방향 설정
     pMissile->SetDir({ -1, -7 });
 
     Scene* pCurScene = SceneManager::GetInst()->GetCurScene();

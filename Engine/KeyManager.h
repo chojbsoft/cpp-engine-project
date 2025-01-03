@@ -2,10 +2,10 @@
 
 enum class KEY_STATE
 {
-	TAP, // 막 누른 시점
-	HOLD, // 누르고 있는
-	AWAY, // 막 뗀 시점
-	NONE, // 이전에도 눌리지 않음
+	TAP, 
+	HOLD, 
+	AWAY, 
+	NONE, 
 };
 
 enum class KEY
@@ -46,8 +46,6 @@ enum class KEY
 struct KeyInfo
 {
 	KEY_STATE eState;
-
-	// 이전 프레임
 	bool bPrev;
 };
 
@@ -67,7 +65,6 @@ public:
 	}
 
 private:
-	// 인덱스가 KEY
 	vector<KeyInfo> vecKey;
 };
 

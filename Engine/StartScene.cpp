@@ -14,26 +14,25 @@ void StartScene::Enter()
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
 
-	// ¸ó½ºÅÍ ¹èÄ¡
+	// ëª¬ìŠ¤í„° ë°°ì¹˜
 	int iMonCount = 5;
 	float fMoveDist = 25.f;
 	float fObjScale = 50.f;
 	Vec2 vResolution = Core::GetInst()->GetResolution();
 	Monster* pMonsterObj = nullptr;
 
-	// ÇÑÂÊ ÀÌµ¿ ¹üÀ§¿Í ½ºÄÉÀÏÀÇ ¹İÀ» ´õÇÑ °ªÀ», ÁÂ¿ì¿¡¼­ »« ½ºÅ©¸°°Å¸®·Î °£°İ ±¸ÇÏ±â
-	float fTerm = (vResolution.x - (fMoveDist + fObjScale / 2) * 2)
-		/ (float)(iMonCount - 1);
+	// í•œìª½ ì´ë™ ë²”ìœ„ì™€ ìŠ¤ì¼€ì¼ì˜ ë°˜ì„ ë”í•œ ê°’ì„, ì¢Œìš°ì—ì„œ ëº€ ìŠ¤í¬ë¦°ê±°ë¦¬ë¡œ ê°„ê²© êµ¬í•˜ê¸°
+	float fTerm = (vResolution.x - (fMoveDist + fObjScale / 2) * 2) / (float)(iMonCount - 1);
 
-	for (int i = 0; i < iMonCount; ++i)
-	{
-		pMonsterObj = new Monster();
-		pMonsterObj->SetPos(Vec2((fMoveDist + fObjScale / 2) + fTerm * i, 50.f));
-		pMonsterObj->SetCenterPos(pMonsterObj->GetPos());
-		pMonsterObj->SetScale({ fObjScale, fObjScale });
-		pMonsterObj->SetMaxDixtance(fMoveDist);
-		AddObject(pMonsterObj, GROUP_TYPE::MONSTER);
-	}
+	//for (int i = 0; i < iMonCount; ++i)
+	//{
+	//	pMonsterObj = new Monster();
+	//	pMonsterObj->SetPos(Vec2((float)((fMoveDist + fObjScale / 2) + fTerm * i), 50.f));
+	//	pMonsterObj->SetCenterPos(pMonsterObj->GetPos());
+	//	pMonsterObj->SetScale({ fObjScale, fObjScale });
+	//	pMonsterObj->SetMaxDixtance(fMoveDist);
+	//	AddObject(pMonsterObj, GROUP_TYPE::MONSTER);
+	//}
 }
 
 void StartScene::Exit()

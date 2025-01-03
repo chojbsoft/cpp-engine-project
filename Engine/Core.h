@@ -13,7 +13,6 @@ private:
 	POINT ptResolution;
 	HDC hDC;
 
-	// 더블버퍼링
 	HBITMAP hBitmap;
 	HDC memDC;
 

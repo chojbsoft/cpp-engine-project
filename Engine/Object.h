@@ -8,7 +8,6 @@ public:
 	virtual ~Object();
 
 public:
-	// Object의 생성자에서 ObjectBase의 플래그를 확인할 수 있음
 	bool HasAnyFlags(const EObjectFlags Flag) const
 	{
 		return (GetFlags() & Flag) != 0;
@@ -21,7 +20,7 @@ public:
 	Vec2 GetScale();
 
 public:
-	virtual void Update() = 0;
+	virtual void Update();
 	virtual void Render(HDC dc);
 
 private:

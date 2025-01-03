@@ -1,12 +1,12 @@
-#pragma once
+﻿#pragma once
 
 class Class;
 class Object;
 
-class ObjectBase
+class ObjectBase : public std::enable_shared_from_this<ObjectBase>
 {
 public:
-	ObjectBase() = default;
+	ObjectBase();
 	ObjectBase(Class* InClass, EObjectFlags InObjectFlags, Object* InOuter)
 		: MyClass(InClass)
 		, ObjectFlags(InObjectFlags)

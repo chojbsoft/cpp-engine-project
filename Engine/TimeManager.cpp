@@ -15,10 +15,10 @@ TimeManager::~TimeManager()
 
 void TimeManager::Init()
 {
-	// ÇöÀç Ä«¿îÆ®
+	// í˜„ìž¬ ì¹´ìš´íŠ¸
 	QueryPerformanceCounter(&prevCount);
 
-	// ÃÊ´ç Ä«¿îÆ® È½¼ö
+	// ì´ˆë‹¹ ì¹´ìš´íŠ¸ íšŸìˆ˜
 	QueryPerformanceFrequency(&frequency);
 }
 
@@ -26,7 +26,7 @@ void TimeManager::Update()
 {
 	QueryPerformanceCounter(&curCount);
 
-	// µ¨Å¸ Å¸ÀÓ
+	// ë¸íƒ€ íƒ€ìž„
 	deltaTime = (curCount.QuadPart - prevCount.QuadPart) 
 		/ (double)frequency.QuadPart;
 
@@ -35,7 +35,7 @@ void TimeManager::Update()
 	++callCount;
 	acc += deltaTime;
 
-	// 1ÃÊ°¡ Áö³µÀ» ¶§
+	// 1ì´ˆê°€ ì§€ë‚¬ì„ ë•Œ
 	if (acc >= 1)
 	{
 		fps = callCount;
