@@ -47,7 +47,7 @@ KeyManager::~KeyManager()
 
 void KeyManager::Init()
 {
-	// ì´ˆê¸°í™”
+	// ÃÊ±âÈ­
 	for (int i = 0; i < (int)KEY::LAST; ++i)
 	{
 		vecKey.push_back({ KEY_STATE::NONE, false });
@@ -56,16 +56,16 @@ void KeyManager::Init()
 
 void KeyManager::Update()
 {
-	// í˜„ì¬ í¬ì»¤ì‹±ë˜ì–´ ìˆëŠ” ìœˆë„ìš° í•¸ë“¤ê°’ ì•Œë ¤ì¤Œ
-	// í”„ë¡œì„¸ìŠ¤ ìƒì—ì„œ ë³´ìœ í•˜ê³  ìˆëŠ” ìœˆë„ìš°ê°€ ì—†ë‹¤ë©´ nullptrë‚˜ì˜´
+	// ÇöÀç Æ÷Ä¿½ÌµÇ¾î ÀÖ´Â À©µµ¿ì ÇÚµé°ª ¾Ë·ÁÁÜ
+	// ÇÁ·Î¼¼½º »ó¿¡¼­ º¸À¯ÇÏ°í ÀÖ´Â À©µµ¿ì°¡ ¾ø´Ù¸é nullptr³ª¿È
 	HWND hWnd = GetFocus();
 
 	if (hWnd)
 	{
-		// í‚¤ì…ë ¥ ë°›ê¸°
+		// Å°ÀÔ·Â ¹Ş±â
 		for (int i = 0; i < (int)KEY::LAST; ++i)
 		{
-			// í˜„ì¬ í”„ë ˆì„ ëˆŒë¦¼
+			// ÇöÀç ÇÁ·¹ÀÓ ´­¸²
 			if (GetAsyncKeyState(arrVK[i]) & 0x8000)
 			{
 				if (vecKey[i].bPrev)
@@ -80,7 +80,7 @@ void KeyManager::Update()
 				vecKey[i].bPrev = true;
 			}
 
-			// í˜„ì¬ í”„ë ˆì„ ì•ˆëˆŒë¦¼
+			// ÇöÀç ÇÁ·¹ÀÓ ¾È´­¸²
 			else
 			{
 				if (vecKey[i].bPrev)

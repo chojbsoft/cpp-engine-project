@@ -14,14 +14,14 @@ void StartScene::Enter()
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
 
-	// ëª¬ìŠ¤í„° ë°°ì¹˜
+	// ¸ó½ºÅÍ ¹èÄ¡
 	int iMonCount = 5;
 	float fMoveDist = 25.f;
 	float fObjScale = 50.f;
 	Vec2 vResolution = Core::GetInst()->GetResolution();
 	Monster* pMonsterObj = nullptr;
 
-	// í•œìª½ ì´ë™ ë²”ìœ„ì™€ ìŠ¤ì¼€ì¼ì˜ ë°˜ì„ ë”í•œ ê°’ì„, ì¢Œìš°ì—ì„œ ëº€ ìŠ¤í¬ë¦°ê±°ë¦¬ë¡œ ê°„ê²© êµ¬í•˜ê¸°
+	// ÇÑÂÊ ÀÌµ¿ ¹üÀ§¿Í ½ºÄÉÀÏÀÇ ¹İÀ» ´õÇÑ °ªÀ», ÁÂ¿ì¿¡¼­ »« ½ºÅ©¸°°Å¸®·Î °£°İ ±¸ÇÏ±â
 	float fTerm = (vResolution.x - (fMoveDist + fObjScale / 2) * 2) / (float)(iMonCount - 1);
 
 	//for (int i = 0; i < iMonCount; ++i)

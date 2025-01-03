@@ -269,9 +269,6 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".editorconfig" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
