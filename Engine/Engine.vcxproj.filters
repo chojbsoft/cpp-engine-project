@@ -75,6 +75,9 @@
     <ClInclude Include="ObjectInitializer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -123,6 +126,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ObjectInitializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameResource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
