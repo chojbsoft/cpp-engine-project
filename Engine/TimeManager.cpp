@@ -31,7 +31,10 @@ void TimeManager::Update()
 		/ (double)frequency.QuadPart;
 
 	prevCount = curCount;
+}
 
+void TimeManager::Render()
+{
 	++callCount;
 	acc += deltaTime;
 

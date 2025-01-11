@@ -3,9 +3,17 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Core.h"
+#include "Texture.h"
+#include "PathManager.h"
 
 void StartScene::Enter()
 {
+	// Texture ·Îµå
+	Texture* tex = new Texture;
+	wstring strFilePath = PathManager::GetInst()->GetResourcePath();
+	strFilePath += L"\\Texture\\Player.bmp";
+	tex->Load(strFilePath);
+
 	Object* pObj = new Player();
 
 	pObj->SetPos({ 640, 384 });
