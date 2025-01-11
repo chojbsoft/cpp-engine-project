@@ -4,6 +4,7 @@
 #include "TimeManager.h"
 #include "KeyManager.h"
 #include "SceneManager.h"
+#include "PathManager.h"
 
 Core::Core()
 	: hWnd(0)
@@ -39,6 +40,7 @@ int Core::Init(HWND hWnd, POINT ptResolution)
 	DeleteObject(hOldBit);
 	
 
+	PathManager::GetInst()->Init();
 	TimeManager::GetInst()->Init();
 	KeyManager::GetInst()->Init();
 	SceneManager::GetInst()->Init();
@@ -61,4 +63,6 @@ void Core::Progress()
 
 	BitBlt(hDC, 0, 0, ptResolution.x, ptResolution.y
 		, memDC, 0, 0, SRCCOPY);
+
+	//TimeManager::GetInst()->Render();
 }

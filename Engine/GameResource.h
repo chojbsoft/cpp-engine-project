@@ -2,8 +2,8 @@
 class GameResource
 {
 private:
-	wstring mStrKey;
-	wstring mStrRelativePath;
+	wstring mStrKey; // 이름
+	wstring mStrRelativePath; // 상대경로
 
 public:
 	void SetKey(const wstring& strKey) { mStrKey = strKey; }
