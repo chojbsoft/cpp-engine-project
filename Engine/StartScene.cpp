@@ -6,15 +6,13 @@
 #include "Texture.h"
 #include "PathManager.h"
 
+
 void StartScene::Enter()
 {
-	// Texture 로드
-	Texture* tex = new Texture;
-	wstring strFilePath = PathManager::GetInst()->GetResourcePath();
-	strFilePath += L"\\Texture\\Player.bmp";
-	tex->Load(strFilePath);
+	// 임시
+	shared = NewObject<Player>(3, 1.0f);
+	Object* pObj = shared.get();
 
-	Object* pObj = new Player();
 
 	pObj->SetPos({ 640, 384 });
 	pObj->SetScale({ 100, 100 });

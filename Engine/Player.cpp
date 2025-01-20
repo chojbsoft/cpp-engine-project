@@ -5,6 +5,29 @@
 #include "Missile.h"
 #include "Scene.h"
 #include "SceneManager.h"
+#include "PathManager.h"
+
+Player::Player()
+{
+}
+
+Player::~Player()
+{
+	if (mTex != nullptr)
+	{
+		delete mTex;
+		mTex = nullptr;
+	}
+}
+
+void Player::Init()
+{
+	// Texture ·Îµå
+	mTex = new Texture;
+	wstring strFilePath = PathManager::GetInst()->GetResourcePath();
+	strFilePath += L"\\Texture\\Player.bmp";
+	mTex->Load(strFilePath);
+}
 
 void Player::Update()
 {
@@ -38,6 +61,7 @@ void Player::Update()
 void Player::Render(HDC dc)
 {
 	Object::Render(dc);
+
 }
 
 

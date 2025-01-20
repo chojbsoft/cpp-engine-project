@@ -1,13 +1,22 @@
 #pragma once
+#include "Texture.h"
 
 class Player : public Object
 {
-	GENERATED_BODY(Player, Object)
+public:
+	Player();
+	~Player();
+
+public:
+	void Init();
 
 public:
 	virtual void Update();
 	virtual void Render(HDC dc);
 	
 	void CreateMissile();
+
+private:
+	Texture* mTex = nullptr;
 };
 

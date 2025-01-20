@@ -27,6 +27,11 @@ void ObjectArray::Destroy()
 	MapMemoryPool.clear();
 }
 
+bool ObjectArray::IsExist(const type_info& InTypeInfo)
+{
+	return MapMemoryPool.find(InTypeInfo.hash_code()) != MapMemoryPool.end();
+}
+
 void FMemoryPool::Create(const string_view InTypeName, const size_t InSizePerOne)
 {
 	if (Pool)

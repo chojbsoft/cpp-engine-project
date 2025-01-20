@@ -9,15 +9,16 @@ public:
 	void Progress();
 
 private:
-	HWND hWnd;
-	POINT ptResolution;
-	HDC hDC;
+	HWND mWnd;
+	POINT mResolution;
+	HDC mDC;
 
-	HBITMAP hBitmap;
-	HDC memDC;
+	HBITMAP mBitmap;
+	HDC mMemDC;
 
 public:
-	HWND GetMainHwnd() { return hWnd; }
-	POINT GetResolution() { return ptResolution; }
+	HWND GetMainHwnd() { return mWnd; }
+	POINT GetResolution() { return mResolution; }
+	HDC GetMainDC() { return mDC; }
 };
 

@@ -7,36 +7,36 @@
 #include "PathManager.h"
 
 Core::Core()
-	: hWnd(0)
-	, ptResolution{}
-	, hDC(0)
+	: mWnd(0)
+	, mResolution{}
+	, mDC(0)
 {
 }
 
 Core::~Core()
 {
-	ReleaseDC(hWnd, hDC);
+	ReleaseDC(mWnd, mDC);
 
-	DeleteDC(memDC);
-	DeleteObject(hBitmap);
+	DeleteDC(mMemDC);
+	DeleteObject(mBitmap);
 }
 
 int Core::Init(HWND hWnd, POINT ptResolution)
 {
-	this->hWnd = hWnd;
-	this->ptResolution = ptResolution;
+	this->mWnd = hWnd;
+	this->mResolution = ptResolution;
 
 	RECT rt{ 0, 0, ptResolution.x, ptResolution.y };
 	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, true);
 	SetWindowPos(hWnd, nullptr, 0, 0
 		, rt.right - rt.left, rt.bottom - rt.top, 0);
 
-	hDC = GetDC(hWnd);
+	mDC = GetDC(hWnd);
 
-	hBitmap = CreateCompatibleBitmap(hDC, ptResolution.x, ptResolution.y);
-	memDC = CreateCompatibleDC(hDC);
+	mBitmap = CreateCompatibleBitmap(mDC, ptResolution.x, ptResolution.y);
+	mMemDC = CreateCompatibleDC(mDC);
 
-	HGDIOBJ hOldBit = SelectObject(memDC, hBitmap);
+	HGDIOBJ hOldBit = SelectObject(mMemDC, mBitmap);
 	DeleteObject(hOldBit);
 	
 
@@ -56,13 +56,13 @@ void Core::Progress()
 	KeyManager::GetInst()->Update();
 	SceneManager::GetInst()->Update();
 
-	Rectangle(memDC, -1, -1, ptResolution.x + 1
-		, ptResolution.y + 1);
+	Rectangle(mMemDC, -1, -1, mResolution.x + 1
+		, mResolution.y + 1);
 
-	SceneManager::GetInst()->Render(memDC);
+	SceneManager::GetInst()->Render(mMemDC);
 
-	BitBlt(hDC, 0, 0, ptResolution.x, ptResolution.y
-		, memDC, 0, 0, SRCCOPY);
+	BitBlt(mDC, 0, 0, mResolution.x, mResolution.y
+		, mMemDC, 0, 0, SRCCOPY);
 
 	//TimeManager::GetInst()->Render();
 }
