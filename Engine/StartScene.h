@@ -3,7 +3,6 @@
 
 class StartScene : public Scene
 {
-	// ÇÑ±Û
 public:
 	virtual void Enter();
 	virtual void Exit();

@@ -1,17 +1,13 @@
 #pragma once
 #include "ObjectArray.h"
 
-class Object /*: public ObjectBase*/
+class Object
 {
 public:
 	Object();
 	virtual ~Object();
 
 public:
-	//bool HasAnyFlags(const EObjectFlags Flag) const
-	//{
-	//	return (GetFlags() & Flag) != 0;
-	//}
 
 public:
 	void SetPos(Vec2 pos);
