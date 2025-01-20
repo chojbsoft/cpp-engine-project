@@ -11,19 +11,6 @@ private:\
 	type();\
 	~type();\
 
-#define GENERATED_BODY(Type, BaseType)\
-public:\
-DEFINE_DEFAULT_CONSTRUCTOR_CALL(Type)\
-static Class* StaticClass() { return staticClass;}\
-static inline Class* staticClass = \
-	RegisterEngineClass<Type>(L#Type);\
-private:\
-	using ThisClass = Type;\
-	using Super = BaseType;\
-
-#define DEFINE_DEFAULT_CONSTRUCTOR_CALL(TClass) \
-	static void __DefaultConstructor(const ObjectInitializer& X) { new(X.GetObj())TClass; }
-
 
 #define DT TimeManager::GetInst()->GetDT()
 #define fDT TimeManager::GetInst()->GetDT()

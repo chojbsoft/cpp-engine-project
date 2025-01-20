@@ -17,3 +17,6 @@ using namespace std;
 
 #include "Object.h"
 #include "Class.h"
+
+#include <locale>
+#include <codecvt>
