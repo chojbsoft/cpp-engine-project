@@ -16,7 +16,6 @@ using namespace std;
 #include <boost/pool/pool.hpp>
 
 #include "Object.h"
-#include "Class.h"
 
 #include <locale>
 #include <codecvt>
