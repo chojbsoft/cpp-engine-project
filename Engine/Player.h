@@ -8,7 +8,6 @@ public:
 	~Player();
 
 public:
-	void Init();
 
 public:
 	virtual void Update();

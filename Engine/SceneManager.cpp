@@ -32,9 +32,10 @@ SceneManager::~SceneManager()
 {
 	for (UINT i = 0; i < (UINT)SCENE_TYPE::END; ++i)
 	{
-		if (scenes[i] == nullptr)
+		if (scenes[i])
 		{
 			delete scenes[i];
+			scenes[i] = nullptr;
 		}
 	}
 }

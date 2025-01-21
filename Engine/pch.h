@@ -1,21 +1,19 @@
 #pragma once
 #include <windows.h>
-#include "define.h"
-#include "Struct.h"
+#include <cmath>
+#include <memory>
+#include <typeinfo>
+#include <iostream>
 
 #include <vector>
 #include <map>
 #include <unordered_map>
 #include <string>
+#include <boost/pool/pool.hpp>
 using namespace std;
 
-#include <cmath>
-#include <memory>
-#include <typeinfo>
-
-#include <boost/pool/pool.hpp>
-
+#include "define.h"
+#include "Struct.h"
 #include "Object.h"
 
-#include <locale>
-#include <codecvt>
+#pragma comment(lib, "Msimg32.lib")

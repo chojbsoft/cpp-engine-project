@@ -9,11 +9,11 @@ public:
 	virtual ~Scene();
 
 private:
-	vector<Object*> objs[(UINT)GROUP_TYPE::END];
+	vector<shared_ptr<Object>> objs[(UINT)GROUP_TYPE::END];
 	wstring strName;
 
 public:
-	void AddObject(Object* obj, GROUP_TYPE type)
+	void AddObject(shared_ptr<Object> obj, GROUP_TYPE type)
 	{
 		objs[(UINT)type].push_back(obj);
 	}
