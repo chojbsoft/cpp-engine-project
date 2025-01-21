@@ -1,7 +1,10 @@
 #pragma once
 
-struct FMemoryPool
+struct MemoryPool
 {
+public:
+	~MemoryPool();
+
 public:
 	void Create(const string_view InTypeName, const size_t InSizePerOne);
 	void* Malloc();
@@ -9,10 +12,10 @@ public:
 	void Destroy();
 
 private:
-	string_view TypeName;
-	size_t SizePerOne;
+	string_view mTypeName;
+	size_t size;
 
-	boost::pool<>* Pool = nullptr;
+	boost::pool<>* pool = nullptr;
 };
 
 class ObjectArray
@@ -25,7 +28,7 @@ public:
 	bool IsExist(const type_info& InTypeInfo);
 
 private:
-	unordered_map<size_t, FMemoryPool> MapMemoryPool;
+	unordered_map<size_t, MemoryPool> mMapMemoryPool;
 };
 
 extern ObjectArray GObjectArray;

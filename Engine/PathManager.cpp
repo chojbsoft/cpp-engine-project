@@ -18,7 +18,6 @@ void PathManager::Init()
 	
 	ToParentDir(2);
 	wcscat_s(mResourcePath, 255, L"\\Resource");
-	SetWindowText(Core::GetInst()->GetMainHwnd(), mResourcePath);
 }
 
 void PathManager::ToParentDir(int cnt)

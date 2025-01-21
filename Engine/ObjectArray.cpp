@@ -5,61 +5,66 @@ ObjectArray GObjectArray;
 
 void ObjectArray::Create(const type_info& InTypeInfo, const size_t InSizePerOne)
 {
-	MapMemoryPool[InTypeInfo.hash_code()].Create(InTypeInfo.name(), InSizePerOne);
+	mMapMemoryPool[InTypeInfo.hash_code()].Create(InTypeInfo.name(), InSizePerOne);
 }
 
 void* ObjectArray::Malloc(const type_info& InTypeInfo)
 {
-	return MapMemoryPool[InTypeInfo.hash_code()].Malloc();
+	return mMapMemoryPool[InTypeInfo.hash_code()].Malloc();
 }
 
 void ObjectArray::Free(const type_info& InTypeInfo, void* InAddress)
 {
-	MapMemoryPool[InTypeInfo.hash_code()].Free(InAddress);
+	mMapMemoryPool[InTypeInfo.hash_code()].Free(InAddress);
 }
 
 void ObjectArray::Destroy()
 {
-	for (auto& Pair : MapMemoryPool)
+	for (auto& Pair : mMapMemoryPool)
 	{
 		Pair.second.Destroy();
 	}
-	MapMemoryPool.clear();
+	mMapMemoryPool.clear();
 }
 
 bool ObjectArray::IsExist(const type_info& InTypeInfo)
 {
-	return MapMemoryPool.find(InTypeInfo.hash_code()) != MapMemoryPool.end();
+	return mMapMemoryPool.find(InTypeInfo.hash_code()) != mMapMemoryPool.end();
 }
 
-void FMemoryPool::Create(const string_view InTypeName, const size_t InSizePerOne)
+MemoryPool::~MemoryPool()
 {
-	if (Pool)
+	delete pool;
+}
+
+void MemoryPool::Create(const string_view InTypeName, const size_t InSizePerOne)
+{
+	if (pool)
 	{
 		return;
 	}
 
-	TypeName = InTypeName;
-	SizePerOne = InSizePerOne;
-	Pool = new boost::pool<>(SizePerOne);
+	mTypeName = InTypeName;
+	size = InSizePerOne;
+	pool = new boost::pool<>(size);
 }
 
-void* FMemoryPool::Malloc()
+void* MemoryPool::Malloc()
 {
-	void* Address = Pool->malloc();
+	void* Address = pool->malloc();
 	return Address;
 }
 
-void FMemoryPool::Free(void* InAddress)
+void MemoryPool::Free(void* InAddress)
 {
-	Pool->free(InAddress);
+	pool->free(InAddress);
 }
 
-void FMemoryPool::Destroy()
+void MemoryPool::Destroy()
 {
-	if (Pool)
+	if (pool)
 	{
-		delete Pool;
-		Pool = nullptr;
+		delete pool;
+		pool = nullptr;
 	}
 }

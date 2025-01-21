@@ -27,19 +27,12 @@ Scene::Scene()
 {
 	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
 	{
-		objs[i] = vector<Object*>();
+		objs[i] = vector<shared_ptr<Object>>();
 	}
 }
 
 Scene::~Scene()
 {
-	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
-	{
-		for (size_t j = 0; j < objs[i].size(); ++j)
-		{
-			delete objs[i][j];
-		}
-	}
 }
 
 

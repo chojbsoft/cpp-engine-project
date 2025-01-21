@@ -9,16 +9,12 @@
 
 void StartScene::Enter()
 {
-	// 임시
-	shared = NewObject<Player>(3, 1.0f);
-	Object* pObj = shared.get();
+	shared_ptr<Object> player = NewObject<Player>();
 
+	player->SetPos({ 640, 384 });
+	player->SetScale({ 100, 100 });
 
-	pObj->SetPos({ 640, 384 });
-	pObj->SetScale({ 100, 100 });
-
-	AddObject(pObj, GROUP_TYPE::PLAYER);
-
+	AddObject(player, GROUP_TYPE::PLAYER);
 
 	// 몬스터 배치
 	int iMonCount = 5;
@@ -32,12 +28,12 @@ void StartScene::Enter()
 
 	for (int i = 0; i < iMonCount; ++i)
 	{
-		pMonsterObj = new Monster();
-		pMonsterObj->SetPos(Vec2((float)((fMoveDist + fObjScale / 2) + fTerm * i), 50.f));
-		pMonsterObj->SetCenterPos(pMonsterObj->GetPos());
-		pMonsterObj->SetScale({ fObjScale, fObjScale });
-		pMonsterObj->SetMaxDixtance(fMoveDist);
-		AddObject(pMonsterObj, GROUP_TYPE::MONSTER);
+		shared_ptr<Monster> monster = NewObject<Monster>();
+		monster->SetPos(Vec2((float)((fMoveDist + fObjScale / 2) + fTerm * i), 50.f));
+		monster->SetCenterPos(monster->GetPos());
+		monster->SetScale({ fObjScale, fObjScale });
+		monster->SetMaxDixtance(fMoveDist);
+		AddObject(monster, GROUP_TYPE::MONSTER);
 	}
 }
 
