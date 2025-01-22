@@ -24,19 +24,19 @@ void Player::Update()
 
 	if (KEY_HOLD(KEY::W))
 	{
-		pos.y -= 200.f * DT;
+		pos._y -= 200.f * DT;
 	}
 	if (KEY_HOLD(KEY::S))
 	{
-		pos.y += 200.f * DT;
+		pos._y += 200.f * DT;
 	}
 	if (KEY_HOLD(KEY::A))
 	{
-		pos.x -= 200.f * DT;
+		pos._x -= 200.f * DT;
 	}
 	if (KEY_HOLD(KEY::D))
 	{
-		pos.x += 200.f * DT;
+		pos._x += 200.f * DT;
 	}
 
 	if (KEY_TAP(KEY::SPACE))
@@ -55,8 +55,8 @@ void Player::Render(HDC dc)
 
 	// 좌상단 좌표
 	Vec2 Pos = GetPos();
-	int x = Pos.x - (width / 2);
-	int y = Pos.y - (height / 2);
+	int x = Pos._x - (width / 2);
+	int y = Pos._y - (height / 2);
 	
 	// 원하는 픽셀만 복사하기 위해
 	TransparentBlt(dc, x, y, width, height, mTex->GetDC(), 0, 0, width, height, RGB(255, 0, 255));
@@ -66,7 +66,7 @@ void Player::Render(HDC dc)
 void Player::CreateMissile()
 {
     Vec2 vMissilePos = GetPos();
-    vMissilePos.y -= GetScale().y / 2.f;
+    vMissilePos._y -= GetScale()._y / 2.f;
 
 	shared_ptr<Missile> pMissile = NewObject<Missile>();
 	pMissile->CreateCollider();

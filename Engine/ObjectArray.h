@@ -6,32 +6,32 @@ public:
 	~MemoryPool();
 
 public:
-	void Create(const string_view InTypeName, const size_t InSizePerOne);
+	void Create(const string_view typeName, const size_t sizePerOne);
 	void* Malloc();
-	void Free(void* InPtr);
+	void Free(void* ptr);
 	void Destroy();
 
 private:
-	string_view mTypeName;
-	size_t size;
+	string_view _typeName;
+	size_t _size;
 
-	boost::pool<>* pool = nullptr;
+	boost::pool<>* _pool = nullptr;
 };
 
 class ObjectArray
 {
 public:
-	void Create(const type_info& InTypeInfo, const size_t InSizePerOne);
-	void* Malloc(const type_info& InTypeInfo);
-	void Free(const type_info& InTypeInfo, void* InAddress);
+	void Create(const type_info& typeInfo, const size_t size);
+	void* Malloc(const type_info& typeInfo);
+	void Free(const type_info& typeInfo, void* address);
 	void Destroy();
-	bool IsExist(const type_info& InTypeInfo);
+	bool IsExist(const type_info& typeInfo);
 
 private:
-	unordered_map<size_t, MemoryPool> mMapMemoryPool;
+	unordered_map<size_t, MemoryPool> _memoryPool;
 };
 
-extern ObjectArray GObjectArray;
+extern ObjectArray _objectArray;
 
 
 template <class _Ty>
@@ -55,13 +55,13 @@ public:
 	using is_always_equal _CXX20_DEPRECATE_IS_ALWAYS_EQUAL = true_type;
 	
 	Allocator(const type_info& typeInfo) noexcept :
-		mTypeInfo(typeInfo)
+		_typeInfo(typeInfo)
 	{
 	}
 	constexpr Allocator(const Allocator&) noexcept = default;
 	template <class _Other>
 	constexpr Allocator(const Allocator<_Other>& InOther) noexcept :
-		mTypeInfo(InOther.mTypeInfo)
+		_typeInfo(InOther._typeInfo)
 	{
 	}
 	_CONSTEXPR20 ~Allocator() = default;
@@ -81,13 +81,13 @@ public:
 		// no overflow check on the following multiply; we assume _Allocate did that check
 		//_Deallocate<_New_alignof<_Ty>>(_Ptr, sizeof(_Ty) * _Count);
 
-		GObjectArray.Free(mTypeInfo, _Ptr);
+		_objectArray.Free(_typeInfo, _Ptr);
 	}
 
 	_NODISCARD_RAW_PTR_ALLOC _CONSTEXPR20 __declspec(allocator) _Ty* allocate(_CRT_GUARDOVERFLOW const size_t /*_Count*/)
 	{
 		static_assert(sizeof(value_type) > 0, "value_type must be complete before calling allocate.");
-		_Ty* Pointer = (_Ty*)GObjectArray.Malloc(mTypeInfo);
+		_Ty* Pointer = (_Ty*)_objectArray.Malloc(_typeInfo);
 		return Pointer;
 	}
 
@@ -98,7 +98,7 @@ public:
 	}
 
 public:
-	const type_info& mTypeInfo;
+	const type_info& _typeInfo;
 };
 
 _EXPORT_STD template <class _Ty, class _Other>

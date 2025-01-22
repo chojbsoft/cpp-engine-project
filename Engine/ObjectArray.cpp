@@ -1,70 +1,70 @@
 #include "pch.h"
 #include "ObjectArray.h"
 
-ObjectArray GObjectArray;
+ObjectArray _objectArray;
 
-void ObjectArray::Create(const type_info& InTypeInfo, const size_t InSizePerOne)
+void ObjectArray::Create(const type_info& typeInfo, const size_t size)
 {
-	mMapMemoryPool[InTypeInfo.hash_code()].Create(InTypeInfo.name(), InSizePerOne);
+	_memoryPool[typeInfo.hash_code()].Create(typeInfo.name(), size);
 }
 
-void* ObjectArray::Malloc(const type_info& InTypeInfo)
+void* ObjectArray::Malloc(const type_info& typeInfo)
 {
-	return mMapMemoryPool[InTypeInfo.hash_code()].Malloc();
+	return _memoryPool[typeInfo.hash_code()].Malloc();
 }
 
-void ObjectArray::Free(const type_info& InTypeInfo, void* InAddress)
+void ObjectArray::Free(const type_info& typeInfo, void* address)
 {
-	mMapMemoryPool[InTypeInfo.hash_code()].Free(InAddress);
+	_memoryPool[typeInfo.hash_code()].Free(address);
 }
 
 void ObjectArray::Destroy()
 {
-	for (auto& Pair : mMapMemoryPool)
+	for (auto& Pair : _memoryPool)
 	{
 		Pair.second.Destroy();
 	}
-	mMapMemoryPool.clear();
+	_memoryPool.clear();
 }
 
 bool ObjectArray::IsExist(const type_info& InTypeInfo)
 {
-	return mMapMemoryPool.find(InTypeInfo.hash_code()) != mMapMemoryPool.end();
+	return _memoryPool.find(InTypeInfo.hash_code()) != _memoryPool.end();
 }
 
 MemoryPool::~MemoryPool()
 {
-	delete pool;
+	delete _pool;
 }
 
-void MemoryPool::Create(const string_view InTypeName, const size_t InSizePerOne)
+void MemoryPool::Create(const string_view typeName, const size_t size)
 {
-	if (pool)
+	if (_pool)
 	{
 		return;
 	}
 
-	mTypeName = InTypeName;
-	size = InSizePerOne;
-	pool = new boost::pool<>(size);
+	_typeName = typeName;
+	_size = size;
+	_pool = new boost::pool<>(_size);
 }
 
 void* MemoryPool::Malloc()
 {
-	void* Address = pool->malloc();
+	void* Address = _pool->malloc();
 	return Address;
 }
 
 void MemoryPool::Free(void* InAddress)
 {
-	pool->free(InAddress);
+	_pool->free(InAddress);
 }
 
 void MemoryPool::Destroy()
 {
-	if (pool)
+	if (_pool)
 	{
-		delete pool;
-		pool = nullptr;
+		delete _pool;
+		_pool = nullptr;
 	}
 }

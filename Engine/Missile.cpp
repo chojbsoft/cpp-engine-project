@@ -3,9 +3,9 @@
 #include "TimeManager.h"
 
 Missile::Missile()
-    : theta(PI / 2.f), dir({ 0, 0 })
+    : _theta(PI / 2.f), _dir({ 0, 0 })
 {
-    dir.Normalize();
+    _dir.Normalize();
 }
   
 Missile::~Missile()
@@ -22,8 +22,8 @@ void Missile::Update()
     //vPos.y -= 200.f * fDT * sinf(m_fTheta);
 
     // 정규화가 된 방향벡터이기 때문에, x는 cos, y는 sin
-    vPos.x += 100.f * fDT * dir.x;
-    vPos.y += 100.f * fDT * dir.y;
+    vPos._x += 100.f * fDT * _dir._x;
+    vPos._y += 100.f * fDT * _dir._y;
 	SetPos(vPos);
 }
 
@@ -33,8 +33,8 @@ void Missile::Render(HDC _dc)
     Vec2 vScale = GetScale();
 
     Ellipse(_dc
-        , int(vPos.x - vScale.x / 2)
-        , int(vPos.y - vScale.y / 2)
-        , int(vPos.x + vScale.x / 2)
-        , int(vPos.y + vScale.y / 2));
+        , int(vPos._x - vScale._x / 2)
+        , int(vPos._y - vScale._y / 2)
+        , int(vPos._x + vScale._x / 2)
+        , int(vPos._y + vScale._y / 2));
 }

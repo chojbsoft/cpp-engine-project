@@ -3,17 +3,6 @@ class TimeManager
 {
 	SINGLE(TimeManager);
 
-private:
-	LARGE_INTEGER prevCount;
-	LARGE_INTEGER curCount;
-	LARGE_INTEGER frequency;
-
-	double deltaTime;
-	double acc;
-
-	UINT callCount;
-	UINT fps;
-
 public:
 	void Init();
 	void Update();
@@ -22,12 +11,24 @@ public:
 public:
 	double GetDT()
 	{
-		return deltaTime;
+		return _deltaTime;
 	}
 
 	float GetfDT()
 	{
-		return deltaTime;
+		return _deltaTime;
 	}
+
+private:
+	LARGE_INTEGER _prevCount;
+	LARGE_INTEGER _curCount;
+	LARGE_INTEGER _frequency;
+
+	double _deltaTime;
+	double _acc;
+
+	UINT _callCount;
+	UINT _fps;
+
 };
 

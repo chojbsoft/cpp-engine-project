@@ -50,7 +50,7 @@ void KeyManager::Init()
 	// 초기화
 	for (int i = 0; i < (int)KEY::LAST; ++i)
 	{
-		vecKey.push_back({ KEY_STATE::NONE, false });
+		_keys.push_back({ KEY_STATE::NONE, false });
 	}
 }
 
@@ -68,31 +68,31 @@ void KeyManager::Update()
 			// 현재 프레임 눌림
 			if (GetAsyncKeyState(arrVK[i]) & 0x8000)
 			{
-				if (vecKey[i].bPrev)
+				if (_keys[i]._isPrev)
 				{
-					vecKey[i].eState = KEY_STATE::HOLD;
+					_keys[i]._state = KEY_STATE::HOLD;
 				}
 				else
 				{
-					vecKey[i].eState = KEY_STATE::TAP;
+					_keys[i]._state = KEY_STATE::TAP;
 				}
 
-				vecKey[i].bPrev = true;
+				_keys[i]._isPrev = true;
 			}
 
 			// 현재 프레임 안눌림
 			else
 			{
-				if (vecKey[i].bPrev)
+				if (_keys[i]._isPrev)
 				{
-					vecKey[i].eState = KEY_STATE::AWAY;
+					_keys[i]._state = KEY_STATE::AWAY;
 				}
 				else
 				{
-					vecKey[i].eState = KEY_STATE::NONE;
+					_keys[i]._state = KEY_STATE::NONE;
 				}
 
-				vecKey[i].bPrev = false;
+				_keys[i]._isPrev = false;
 			}
 		}
 	}
@@ -100,17 +100,17 @@ void KeyManager::Update()
 	{
 		for (int i = 0; i < (int)KEY::LAST; ++i)
 		{
-			vecKey[i].bPrev = false;
+			_keys[i]._isPrev = false;
 
-			if (vecKey[i].eState == KEY_STATE::TAP
-				|| vecKey[i].eState == KEY_STATE::HOLD)
+			if (_keys[i]._state == KEY_STATE::TAP
+				|| _keys[i]._state == KEY_STATE::HOLD)
 			{
 
-				vecKey[i].eState = KEY_STATE::AWAY;
+				_keys[i]._state = KEY_STATE::AWAY;
 			}
-			else if (vecKey[i].eState == KEY_STATE::AWAY)
+			else if (_keys[i]._state == KEY_STATE::AWAY)
 			{
-				vecKey[i].eState == KEY_STATE::NONE;
+				_keys[i]._state == KEY_STATE::NONE;
 			}
 		}
 	}

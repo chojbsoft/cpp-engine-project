@@ -17,7 +17,7 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 
-HWND g_hwnd;
+HWND _wnd;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -40,7 +40,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		return FALSE;
 	}
 
-	if (FAILED(Core::GetInst()->Init(g_hwnd, POINT{ 1280, 760 })))
+	if (FAILED(Core::GetInst()->Init(_wnd, POINT{ 1280, 760 })))
 	{
 		MessageBox(nullptr, L"Core Failed"
 			, L"ERROR", MB_OK);
@@ -123,10 +123,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
 	hInst = hInstance; // Store instance handle in our global variable
 
-	g_hwnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+	_wnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-	if (!g_hwnd)
+	if (!_wnd)
 	{
 		DWORD error = GetLastError();
 		wchar_t buffer[256];
@@ -135,14 +135,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		return FALSE;
 	}
 
-	if (!g_hwnd)
+	if (!_wnd)
 	{
 		return FALSE;
 	}
 
 
-	ShowWindow(g_hwnd, nCmdShow);
-	UpdateWindow(g_hwnd);
+	ShowWindow(_wnd, nCmdShow);
+	UpdateWindow(_wnd);
 
 	return TRUE;
 }
