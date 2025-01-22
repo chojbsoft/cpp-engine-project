@@ -16,6 +16,7 @@ public:
 public:
 	void Init();
 	void Update();
+	void UpdateLate();
 	void Render(HDC dc);
 };
 

@@ -17,8 +17,8 @@ Core::~Core()
 {
 	ReleaseDC(mWnd, mDC);
 
-	DeleteDC(mMemDC);
-	DeleteObject(mBitmap);
+	DeleteDC(m_hMemDC);
+	DeleteObject(m_hBitmap);
 }
 
 int Core::Init(HWND hWnd, POINT ptResolution)
@@ -33,10 +33,10 @@ int Core::Init(HWND hWnd, POINT ptResolution)
 
 	mDC = GetDC(hWnd);
 
-	mBitmap = CreateCompatibleBitmap(mDC, ptResolution.x, ptResolution.y);
-	mMemDC = CreateCompatibleDC(mDC);
+	m_hBitmap = CreateCompatibleBitmap(mDC, ptResolution.x, ptResolution.y);
+	m_hMemDC = CreateCompatibleDC(mDC);
 
-	HGDIOBJ hOldBit = SelectObject(mMemDC, mBitmap);
+	HGDIOBJ hOldBit = SelectObject(m_hMemDC, m_hBitmap);
 	DeleteObject(hOldBit);
 	
 
@@ -56,13 +56,13 @@ void Core::Progress()
 	KeyManager::GetInst()->Update();
 	SceneManager::GetInst()->Update();
 
-	Rectangle(mMemDC, -1, -1, mResolution.x + 1
+	Rectangle(m_hMemDC, -1, -1, mResolution.x + 1
 		, mResolution.y + 1);
 
-	SceneManager::GetInst()->Render(mMemDC);
+	SceneManager::GetInst()->Render(m_hMemDC);
 
 	BitBlt(mDC, 0, 0, mResolution.x, mResolution.y
-		, mMemDC, 0, 0, SRCCOPY);
+		, m_hMemDC, 0, 0, SRCCOPY);
 
 	//TimeManager::GetInst()->Render();
 }

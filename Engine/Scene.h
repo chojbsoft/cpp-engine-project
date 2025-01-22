@@ -35,6 +35,7 @@ public:
 
 	void Render(HDC _dc);
 	void Update();
+	void UpdateLate();
 
 
 };
