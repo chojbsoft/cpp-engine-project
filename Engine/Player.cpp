@@ -60,6 +60,9 @@ void Player::Render(HDC dc)
 	
 	// 원하는 픽셀만 복사하기 위해
 	TransparentBlt(dc, x, y, width, height, mTex->GetDC(), 0, 0, width, height, RGB(255, 0, 255));
+
+	// 컴포넌트 렌더링
+	RenderComponent(dc);
 }
 
 

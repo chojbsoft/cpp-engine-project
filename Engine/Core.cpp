@@ -19,6 +19,12 @@ Core::~Core()
 
 	DeleteDC(_memDC);
 	DeleteObject(_bitmap);
+
+	// GetStockObject으로 받은 GDI 오브젝트 말고, 직접 생성한 것들 해제
+	for (int i = 0; i < (UINT)PEN_TYPE::END; ++i)
+	{
+		DeleteObject(Pens[i]);
+	}
 }
 
 int Core::Init(HWND hWnd, POINT ptResolution)
@@ -39,6 +45,8 @@ int Core::Init(HWND hWnd, POINT ptResolution)
 	HGDIOBJ hOldBit = SelectObject(_memDC, _bitmap);
 	DeleteObject(hOldBit);
 	
+	// 자주 사용하는 GDI 미리 생성
+	CreateBrushPen();
 
 	PathManager::GetInst()->Init();
 	TimeManager::GetInst()->Init();
@@ -65,4 +73,12 @@ void Core::Progress()
 		, _memDC, 0, 0, SRCCOPY);
 
 	//TimeManager::GetInst()->Render();
+}
+
+void Core::CreateBrushPen()
+{
+	Brushes[(UINT)BRUSH_TYPE::HOLLOW] = (HBRUSH)GetStockObject(HOLLOW_BRUSH);
+	Pens[(UINT)PEN_TYPE::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
+	Pens[(UINT)PEN_TYPE::GREEN] = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+	Pens[(UINT)PEN_TYPE::BLUE] = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
 }

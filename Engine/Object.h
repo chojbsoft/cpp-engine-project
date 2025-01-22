@@ -13,6 +13,7 @@ public:
 	virtual void Update();
 	virtual void UpdateLate() final;
 	virtual void Render(HDC dc);
+	void RenderComponent(HDC dc);
 
 public:
 	void SetPos(Vec2 pos);
