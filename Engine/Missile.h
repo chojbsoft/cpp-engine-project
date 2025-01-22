@@ -15,12 +15,12 @@ public:
 public:
 	void SetDir(float theta)
 	{
-		this->theta = theta;
+		this->_theta = theta;
 	}
 
 	void SetDir(Vec2 dir)
 	{
-		this->dir = dir;
+		this->_dir = dir;
 	}
 
 private:
@@ -28,7 +28,7 @@ private:
 	// x, y로 좌표를 구성하는 단위원이라 생각하고, 각도 받기
 	// 즉 오른쪽으로 쏘고싶다면 0도, 왼쪽으로 쏘고싶다면 180도
 	// 각도는 라디안으로 받음
-	float theta;
-	Vec2 dir;
+	float _theta;
+	Vec2 _dir;
 };
 

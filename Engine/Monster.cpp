@@ -10,13 +10,13 @@ Monster::Monster()
 void Monster::Update()
 {
 	Vec2 vCurPos = GetPos();
-	vCurPos.x += DT * speed * dir;
+	vCurPos._x += DT * speed * dir;
 
-	float fDist = abs(vCurPos.x - _centerPos.x) - maxDistance;
+	float fDist = abs(vCurPos._x - _centerPos._x) - maxDistance;
 	if (fDist > 0)
 	{
 		dir *= -1;
-		vCurPos.x += fDist * dir;
+		vCurPos._x += fDist * dir;
 	}
 	SetPos(vCurPos);
 }

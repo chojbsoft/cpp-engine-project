@@ -10,7 +10,7 @@ public:
 	Texture* Load(const wstring& key, const wstring& relativePath);
 
 private:
-	map<wstring, Texture*> mMapTex;
+	map<wstring, Texture*> textureByName;
 
 };
 

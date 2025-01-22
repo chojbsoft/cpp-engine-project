@@ -24,11 +24,11 @@ public:
 	void CreateCollider();
 
 private:
-	Collider* collider;
+	Collider* _collider = nullptr;
 
 private:
-	Vec2 pos;
-	Vec2 scale;
+	Vec2 _pos;
+	Vec2 _scale;
 };
 
 
@@ -39,13 +39,13 @@ shared_ptr<T> NewObject(Args&&... args)
 	// 나중에 allocator 안으로 옮길것
 	const type_info& typeInfo = typeid(T);
 	size_t classSize = sizeof(T);
-	if (!GObjectArray.IsExist(typeInfo))
+	if (!_objectArray.IsExist(typeInfo))
 	{
 		// allocate_shared로 메모리풀에서 연속적으로 관리하기 위해, 레퍼런스카운트 크기 계산
 		const int SharedPtrSize = sizeof(_Ref_count_obj_alloc3 <T, Allocator<T>>) - sizeof(T);
 
 		// 메모리풀 생성
-		GObjectArray.Create(typeInfo, SharedPtrSize + classSize);
+		_objectArray.Create(typeInfo, SharedPtrSize + classSize);
 	}
 
 	// std::forward로 인자의 참조 타입 유지

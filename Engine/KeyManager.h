@@ -45,8 +45,8 @@ enum class KEY
 
 struct KeyInfo
 {
-	KEY_STATE eState;
-	bool bPrev;
+	KEY_STATE _state;
+	bool _isPrev;
 };
 
 
@@ -61,10 +61,10 @@ public:
 public:
 	KEY_STATE GetKeyState(KEY eKey)
 	{
-		return vecKey[(int)eKey].eState;
+		return _keys[(int)eKey]._state;
 	}
 
 private:
-	vector<KeyInfo> vecKey;
+	vector<KeyInfo> _keys;
 };
 

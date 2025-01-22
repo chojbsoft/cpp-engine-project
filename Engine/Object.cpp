@@ -10,35 +10,35 @@ Object::Object()
 
 Object::~Object()
 {
-	if (collider)
+	if (_collider)
 	{
-		delete collider;
+		delete _collider;
 	}
 }
 
 void Object::SetPos(Vec2 pos)
 {
-	this->pos = pos;
+	this->_pos = pos;
 }
 
 void Object::SetScale(Vec2 scale)
 {
-	this->scale = scale;
+	this->_scale = scale;
 }
 
 Vec2 Object::GetPos()
 {
-	return pos;
+	return _pos;
 }
 
 Vec2 Object::GetScale()
 {
-	return scale;
+	return _scale;
 }
 
 void Object::CreateCollider()
 {
-	collider = new Collider(this);
+	_collider = new Collider(this);
 }
 
 void Object::Update()
@@ -47,17 +47,17 @@ void Object::Update()
 
 void Object::UpdateLate()
 {
-	if (collider)
+	if (_collider)
 	{
-		collider->UpdateLate();
+		_collider->UpdateLate();
 	}
 }
 
 void Object::Render(HDC dc)
 {
 	Rectangle(dc
-		, int(pos.x - scale.x / 2)
-		, int(pos.y - scale.y / 2)
-		, int(pos.x + scale.x / 2)
-		, int(pos.y + scale.y / 2));
+		, int(_pos._x - _scale._x / 2)
+		, int(_pos._y - _scale._y / 2)
+		, int(_pos._x + _scale._x / 2)
+		, int(_pos._y + _scale._y / 2));
 }

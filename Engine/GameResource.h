@@ -7,18 +7,18 @@ public:
 
 public:
 	GameResource(wstring strKey, wstring strRelPath) 
-		: mStrKey(strKey), mStrRelativePath(strRelPath) {}
+		: _key(strKey), _relativePath(strRelPath) {}
 
 private:
-	wstring mStrKey; // 이름
-	wstring mStrRelativePath; // 상대경로
+	wstring _key;
+	wstring _relativePath; 
 
 public:
-	void SetKey(const wstring& strKey) { mStrKey = strKey; }
-	void SetRelativePath(const wstring& strPath) { mStrRelativePath = strPath; }
+	void SetKey(const wstring& strKey) { _key = strKey; }
+	void SetRelativePath(const wstring& strPath) { _relativePath = strPath; }
 
-	const wstring& GetKey() { return mStrKey; }
-	const wstring& GetRelativePath() { return mStrRelativePath; }
+	const wstring& GetKey() { return _key; }
+	const wstring& GetRelativePath() { return _relativePath; }
 
 };
 

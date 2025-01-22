@@ -7,11 +7,11 @@ class SceneManager
 	SINGLE(SceneManager);
 
 private:
-	Scene* scenes[(UINT)SCENE_TYPE::END];
-	Scene* curScene;
+	Scene* _scenes[(UINT)SCENE_TYPE::END];
+	Scene* _curScene;
 
 public:
-	Scene* GetCurScene() { return curScene; }
+	Scene* GetCurScene() { return _curScene; }
 
 public:
 	void Init();

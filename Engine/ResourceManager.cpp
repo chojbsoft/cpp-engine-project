@@ -10,8 +10,8 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
-    map<wstring, Texture*>::iterator iter = mMapTex.begin();
-    for (; iter != mMapTex.end(); ++iter)
+    map<wstring, Texture*>::iterator iter = textureByName.begin();
+    for (; iter != textureByName.end(); ++iter)
     {
         delete iter->second;
     }
@@ -30,14 +30,14 @@ Texture* ResourceManager::Load(const wstring& key, const wstring& relativePath)
 
     tex = new Texture(key, relativePath);
     tex->Load(filePath);
-    mMapTex.insert({ key, tex });
+    textureByName.insert({ key, tex });
     return tex;
 }
 
 Texture* ResourceManager::FindTexture(const wstring& key)
 {
-    map<wstring, Texture*>::iterator iter = mMapTex.find(key);
-    if (iter == mMapTex.end())
+    map<wstring, Texture*>::iterator iter = textureByName.find(key);
+    if (iter == textureByName.end())
     {
         return nullptr;
     }

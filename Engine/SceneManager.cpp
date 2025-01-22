@@ -5,27 +5,27 @@
 void SceneManager::Init()
 {
 	// Scene 생성
-	scenes[(UINT)SCENE_TYPE::START] = new StartScene();
-	scenes[(UINT)SCENE_TYPE::START]->SetName(L"Start Scene");
+	_scenes[(UINT)SCENE_TYPE::START] = new StartScene();
+	_scenes[(UINT)SCENE_TYPE::START]->SetName(L"Start Scene");
 
 	// 현재 씬 지정
-	curScene = scenes[(UINT)SCENE_TYPE::START];
-	curScene->Enter();
+	_curScene = _scenes[(UINT)SCENE_TYPE::START];
+	_curScene->Enter();
 }
 
 void SceneManager::Update()
 {
-	curScene->Update();
+	_curScene->Update();
 }
 
 void SceneManager::UpdateLate()
 {
-	curScene->UpdateLate();
+	_curScene->UpdateLate();
 }
 
 void SceneManager::Render(HDC _dc)
 {
-	curScene->Render(_dc);
+	_curScene->Render(_dc);
 }
 
 SceneManager::SceneManager()
@@ -37,10 +37,10 @@ SceneManager::~SceneManager()
 {
 	for (UINT i = 0; i < (UINT)SCENE_TYPE::END; ++i)
 	{
-		if (scenes[i])
+		if (_scenes[i])
 		{
-			delete scenes[i];
-			scenes[i] = nullptr;
+			delete _scenes[i];
+			_scenes[i] = nullptr;
 		}
 	}
 }
