@@ -13,8 +13,8 @@ private:
 	POINT mResolution;
 	HDC mDC;
 
-	HBITMAP mBitmap;
-	HDC mMemDC;
+	HBITMAP m_hBitmap;
+	HDC m_hMemDC;
 
 public:
 	HWND GetMainHwnd() { return mWnd; }

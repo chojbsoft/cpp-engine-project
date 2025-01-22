@@ -1,6 +1,8 @@
 #pragma once
 #include "ObjectArray.h"
 
+class Collider;
+
 class Object
 {
 public:
@@ -8,6 +10,9 @@ public:
 	virtual ~Object();
 
 public:
+	virtual void Update();
+	virtual void UpdateLate() final;
+	virtual void Render(HDC dc);
 
 public:
 	void SetPos(Vec2 pos);
@@ -16,8 +21,10 @@ public:
 	Vec2 GetScale();
 
 public:
-	virtual void Update();
-	virtual void Render(HDC dc);
+	void CreateCollider();
+
+private:
+	Collider* collider;
 
 private:
 	Vec2 pos;

@@ -10,6 +10,7 @@
 void StartScene::Enter()
 {
 	shared_ptr<Object> player = NewObject<Player>();
+	player->CreateCollider();
 
 	player->SetPos({ 640, 384 });
 	player->SetScale({ 100, 100 });

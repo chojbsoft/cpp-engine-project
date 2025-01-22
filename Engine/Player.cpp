@@ -69,6 +69,8 @@ void Player::CreateMissile()
     vMissilePos.y -= GetScale().y / 2.f;
 
 	shared_ptr<Missile> pMissile = NewObject<Missile>();
+	pMissile->CreateCollider();
+
     pMissile->SetPos(vMissilePos);
     pMissile->SetScale(Vec2(25.f, 25.f));
     pMissile->SetDir(PI);

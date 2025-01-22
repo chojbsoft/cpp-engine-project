@@ -18,6 +18,11 @@ void SceneManager::Update()
 	curScene->Update();
 }
 
+void SceneManager::UpdateLate()
+{
+	curScene->UpdateLate();
+}
+
 void SceneManager::Render(HDC _dc)
 {
 	curScene->Render(_dc);
