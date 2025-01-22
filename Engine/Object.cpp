@@ -60,4 +60,14 @@ void Object::Render(HDC dc)
 		, int(_pos._y - _scale._y / 2)
 		, int(_pos._x + _scale._x / 2)
 		, int(_pos._y + _scale._y / 2));
+
+	RenderComponent(dc);
+}
+
+void Object::RenderComponent(HDC dc)
+{
+	if (_collider)
+	{
+		_collider->Render(dc);
+	}
 }

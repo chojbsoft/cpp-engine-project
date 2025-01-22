@@ -33,9 +33,6 @@ enum class GROUP_TYPE
 
 
 	END = 32,
-
-
-
 };
 
 enum class SCENE_TYPE
@@ -49,10 +46,20 @@ enum class SCENE_TYPE
 	END
 };
 
-
-enum EObjectFlags
+enum class BRUSH_TYPE
 {
-	RF_NoFlags = 0x00000000,
-	RF_ClassDefaultObject = 0x00000010,
-	RF_Class = 0x00000020
+	HOLLOW,
+
+
+	END
+};
+
+enum class PEN_TYPE
+{
+	RED,
+	GREEN,
+	BLUE,
+
+
+	END
 };
