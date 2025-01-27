@@ -34,6 +34,21 @@ public:
 		return Vec2(_x + other._x, _y + other._y);
 	}
 
+	Vec2 operator-(Vec2 other)
+	{
+		return Vec2(_x - other._x, _y - other._y);
+	}
+
+	Vec2 operator*(float other)
+	{
+		return Vec2(_x * other, _y * other);
+	}
+
+	Vec2 operator/(float other)
+	{
+		return Vec2(_x / other, _y / other);
+	}
+
 public:
 	double Length()
 	{
@@ -47,6 +62,11 @@ public:
 		_y /= len;
 
 		return *this;
+	}
+
+	static Vec2 Zero()
+	{
+		return Vec2(0, 0);
 	}
 
 public:

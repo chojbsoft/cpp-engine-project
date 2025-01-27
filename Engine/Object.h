@@ -22,7 +22,7 @@ public:
 	Vec2 GetScale();
 
 public:
-	void CreateCollider();
+	void CreateCollider(Vec2 offsetPos, Vec2 scale);
 
 private:
 	Collider* _collider = nullptr;
