@@ -5,15 +5,16 @@
 #include "Core.h"
 #include "Texture.h"
 #include "PathManager.h"
+#include "CollisionManager.h"
 
 
 void StartScene::Enter()
 {
 	shared_ptr<Object> player = NewObject<Player>();
-	player->CreateCollider();
 
 	player->SetPos({ 640, 384 });
 	player->SetScale({ 100, 100 });
+	player->CreateCollider(Vec2::Zero(), player->GetScale() / 2.0f);
 
 	AddObject(player, GROUP_TYPE::PLAYER);
 
@@ -34,10 +35,16 @@ void StartScene::Enter()
 		monster->SetCenterPos(monster->GetPos());
 		monster->SetScale({ objScale, objScale });
 		monster->SetMaxDixtance(dist);
+		monster->CreateCollider(Vec2::Zero(), monster->GetScale() / 2.0f);
+
 		AddObject(monster, GROUP_TYPE::MONSTER);
 	}
+
+	CollisionManager::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
 }
 
 void StartScene::Exit()
 {
+	// 씬에서 지정되어 있던 충돌체 그룹 설정 해제
+	CollisionManager::GetInst()->Reset();
 }

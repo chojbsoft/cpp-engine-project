@@ -5,6 +5,8 @@
 #include "KeyManager.h"
 #include "SceneManager.h"
 #include "PathManager.h"
+#include "PathManager.h"
+#include "CollisionManager.h"
 
 Core::Core()
 	: _wnd(0)
@@ -63,14 +65,13 @@ void Core::Progress()
 	TimeManager::GetInst()->Update();
 	KeyManager::GetInst()->Update();
 	SceneManager::GetInst()->Update();
+	SceneManager::GetInst()->UpdateLate();
+	CollisionManager::GetInst()->Update();
 
-	Rectangle(_memDC, -1, -1, _resolution.x + 1
-		, _resolution.y + 1);
-
+	// Render
+	Rectangle(_memDC, -1, -1, _resolution.x + 1, _resolution.y + 1);
 	SceneManager::GetInst()->Render(_memDC);
-
-	BitBlt(_dc, 0, 0, _resolution.x, _resolution.y
-		, _memDC, 0, 0, SRCCOPY);
+	BitBlt(_dc, 0, 0, _resolution.x, _resolution.y, _memDC, 0, 0, SRCCOPY);
 
 	//TimeManager::GetInst()->Render();
 }

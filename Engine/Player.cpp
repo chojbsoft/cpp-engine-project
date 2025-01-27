@@ -72,13 +72,14 @@ void Player::CreateMissile()
     vMissilePos._y -= GetScale()._y / 2.f;
 
 	shared_ptr<Missile> pMissile = NewObject<Missile>();
-	pMissile->CreateCollider();
 
     pMissile->SetPos(vMissilePos);
     pMissile->SetScale(Vec2(25.f, 25.f));
     pMissile->SetDir(PI);
 
     pMissile->SetDir({ -1, -7 });
+
+	pMissile->CreateCollider(Vec2::Zero(), pMissile->GetScale());
 
     Scene* pCurScene = SceneManager::GetInst()->GetCurScene();
     pCurScene->AddObject(pMissile, GROUP_TYPE::DEFAULT);
