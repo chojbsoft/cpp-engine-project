@@ -36,6 +36,12 @@ Vec2 Object::GetScale()
 	return _scale;
 }
 
+
+Collider* Object::GetCollider()
+{
+	return _collider;
+}
+
 void Object::CreateCollider(Vec2 offsetPos, Vec2 scale)
 {
 	_collider = new Collider(this, offsetPos, scale);

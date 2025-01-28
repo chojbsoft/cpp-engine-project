@@ -19,6 +19,10 @@ private:
 
 	// UpdateLate에서 계산
 	Vec2 _finalPos;
+
+private:
+	UINT ID;
+	static UINT nextID;
 	
 };
 

@@ -20,6 +20,7 @@ public:
 	void SetScale(Vec2 scale);
 	Vec2 GetPos();
 	Vec2 GetScale();
+	Collider* GetCollider();
 
 public:
 	void CreateCollider(Vec2 offsetPos, Vec2 scale);
