@@ -4,7 +4,7 @@
 #include "SelectGDI.h"
 
 Collider::Collider(Object* owner, Vec2 offsetPos, Vec2 scale)
-	:_owner(owner), _offsetPos(offsetPos), _scale(scale)
+	:_owner(owner), _offsetPos(offsetPos), _scale(scale), ID(nextID++)
 {
 
 }

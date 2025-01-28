@@ -30,6 +30,11 @@ public:
 
 	}
 
+	const vector<shared_ptr<Object>>& GetGroupObject(GROUP_TYPE type)
+	{
+		return objs[(UINT)type];
+	}
+
 	virtual void Enter() = 0;
 	virtual void Exit() = 0;
 
