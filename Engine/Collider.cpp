@@ -4,9 +4,14 @@
 #include "SelectGDI.h"
 
 Collider::Collider(Object* owner, Vec2 offsetPos, Vec2 scale)
-	:_owner(owner), _offsetPos(offsetPos), _scale(scale), ID(nextID++)
+	:_owner(owner), _offsetPos(offsetPos), _scale(scale), _ID(_nextID++)
 {
 
+}
+
+Collider::Collider(const Collider& other)
+	:_owner(nullptr), _offsetPos(other._offsetPos), _scale(other._scale), _ID(_nextID++)
+{
 }
 
 void Collider::UpdateLate()
@@ -25,4 +30,17 @@ void Collider::Render(HDC dc)
 		, int(_finalPos._y - _scale._y / 2)
 		, int(_finalPos._x + _scale._x / 2)
 		, int(_finalPos._y + _scale._y / 2));
+}
+
+void Collider::OnCollision(Collider* other)
+{
+	
+}
+
+void Collider::OnCollisionEnter(Collider* other)
+{
+}
+
+void Collider::OnCollisionEnd(Collider* other)
+{
 }

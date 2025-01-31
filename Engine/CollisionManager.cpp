@@ -79,10 +79,10 @@ void CollisionManager::UpdateInternal(GROUP_TYPE left, GROUP_TYPE right)
 			continue;
 		}
 
-		for (int j = 0; j < (int)GROUP_TYPE::END; ++j)
+		for (int j = 0; j < leftObjs.size(); ++j)
 		{
 			Collider* rightCollider = rightObjs[i]->GetCollider();
-			if (!rightObjs[j]->GetCollider())
+			if (!rightCollider)
 			{
 				continue;
 			}
@@ -93,17 +93,52 @@ void CollisionManager::UpdateInternal(GROUP_TYPE left, GROUP_TYPE right)
 				continue;
 			}
 
-			if (IsCollided(leftCollider, rightCollider))
+			// 이전 프레임의 충돌 정보를 위헤
+			COLLIDER_ID ID;
+			ID.left = leftCollider->GetID();
+			ID.right = rightCollider->GetID();
+			unordered_map<ULONGLONG, bool>::iterator iter = colInfo.find(ID.ID);
+			
+			// 없다면 등록
+			if (iter == colInfo.end())
 			{
-
+				colInfo.insert({ ID.ID, false });
+				iter = colInfo.find(ID.ID);
 			}
 
+			// 현재 프레임 충돌
+			if (IsCollided(leftCollider, rightCollider))
+			{
+				// 이전에도 충돌
+				if (iter->second)
+				{
+					leftCollider->OnCollision(rightCollider);
+					rightCollider->OnCollision(leftCollider);
+				}
+				// 새롭게 충돌
+				else
+				{
+					leftCollider->OnCollisionEnter(rightCollider);
+					rightCollider->OnCollisionEnter(leftCollider);
+					iter->second = true;
+				}
+			}
+			// 현재 프레임 충돌 안함
+			else
+			{
+				// 이전 프레임 충돌 했었음
+				if (iter->second)
+				{
+					leftCollider->OnCollisionEnd(rightCollider);
+					rightCollider->OnCollisionEnd(leftCollider);
+					iter->second = false;
+				}
+			}
 		}
 	}
-
 }
 
 bool CollisionManager::IsCollided(Collider* left, Collider* right)
 {
-
+	return false;
 }
