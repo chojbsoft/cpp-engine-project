@@ -6,10 +6,25 @@ class Collider
 {
 public:
 	Collider(Object* owner, Vec2 offsetPos, Vec2 scale);
+	Collider(const Collider& other);
+
+	// 대입 연산자는 막아두기
+	const Collider& operator=(const Collider& other) = delete;
 
 public:
 	void UpdateLate();
 	void Render(HDC dc);
+
+public:
+	UINT GetID() { return _ID; };
+
+public:
+	// 충돌 중인 상태
+	void OnCollision(Collider* other);
+
+	void OnCollisionEnter(Collider* other);
+
+	void OnCollisionEnd(Collider* other);
 
 private:
 	// 따라다니기 위해 소유자를 알아야함
@@ -21,8 +36,11 @@ private:
 	Vec2 _finalPos;
 
 private:
-	UINT ID;
-	static UINT nextID;
+	UINT _ID;
+	
+	// 고유한 ID를 부여하기 위한 static 변수
+	// 생성자
+	static inline UINT _nextID;
 	
 };
 
