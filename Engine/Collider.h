@@ -17,6 +17,8 @@ public:
 
 public:
 	UINT GetID() { return _ID; };
+	Vec2 GetFinalPos() { return _finalPos; };
+	Vec2 GetScale() { return _scale; };
 
 public:
 	// 충돌 중인 상태
@@ -41,6 +43,8 @@ private:
 	// 고유한 ID를 부여하기 위한 static 변수
 	// 생성자
 	static inline UINT _nextID;
+
+	int _isColliding = false;
 	
 };
 

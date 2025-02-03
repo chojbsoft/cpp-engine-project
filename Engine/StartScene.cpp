@@ -19,7 +19,7 @@ void StartScene::Enter()
 	AddObject(player, GROUP_TYPE::PLAYER);
 
 	// 몬스터 배치
-	int cnt = 5;
+	int cnt = 2;
 	float dist = 25.f;
 	float objScale = 50.f;
 	Vec2 resolution = Core::GetInst()->GetResolution();
@@ -32,7 +32,6 @@ void StartScene::Enter()
 	{
 		shared_ptr<Monster> monster = NewObject<Monster>();
 		monster->SetPos(Vec2((float)((dist + objScale / 2) + term * i), 50.f));
-		monster->SetCenterPos(monster->GetPos());
 		monster->SetScale({ objScale, objScale });
 		monster->SetMaxDixtance(dist);
 		monster->CreateCollider(Vec2::Zero(), monster->GetScale() / 2.0f);

@@ -17,22 +17,6 @@ void CollisionManager::Init()
 {
 }
 
-void CollisionManager::Update()
-{
-	// 활성화되어 있는 충돌 채널 확인
-	for (int i = 0; i < (int)GROUP_TYPE::END; ++i)
-	{
-		// col은 항상 row보다 같거나 크게해서, 효율적으로
-		for (int j = i; j < (int)GROUP_TYPE::END; ++j)
-		{
-			if (_check[i] & (1 << j))
-			{
-				UpdateInternal((GROUP_TYPE)i, (GROUP_TYPE)j);
-			}
-		}
-	}
-}
-
 void CollisionManager::CheckGroup(GROUP_TYPE left, GROUP_TYPE right)
 {
 	// 더 작은 숫자를 행으로 접근하기
@@ -63,6 +47,22 @@ void CollisionManager::Reset()
 	memset(_check, 0, sizeof(UINT) * (UINT)GROUP_TYPE::END);
 }
 
+void CollisionManager::Update()
+{
+	// 활성화되어 있는 충돌 채널 확인
+	for (int i = 0; i < (int)GROUP_TYPE::END; ++i)
+	{
+		// col은 항상 row보다 같거나 크게해서, 효율적으로
+		for (int j = i; j < (int)GROUP_TYPE::END; ++j)
+		{
+			if (_check[i] & (1 << j))
+			{
+				UpdateInternal((GROUP_TYPE)i, (GROUP_TYPE)j);
+			}
+		}
+	}
+}
+
 void CollisionManager::UpdateInternal(GROUP_TYPE left, GROUP_TYPE right)
 {
 	Scene* currScene = SceneManager::GetInst()->GetCurScene();
@@ -79,9 +79,9 @@ void CollisionManager::UpdateInternal(GROUP_TYPE left, GROUP_TYPE right)
 			continue;
 		}
 
-		for (int j = 0; j < leftObjs.size(); ++j)
+		for (int j = 0; j < rightObjs.size(); ++j)
 		{
-			Collider* rightCollider = rightObjs[i]->GetCollider();
+			Collider* rightCollider = rightObjs[j]->GetCollider();
 			if (!rightCollider)
 			{
 				continue;
@@ -98,7 +98,7 @@ void CollisionManager::UpdateInternal(GROUP_TYPE left, GROUP_TYPE right)
 			ID.left = leftCollider->GetID();
 			ID.right = rightCollider->GetID();
 			unordered_map<ULONGLONG, bool>::iterator iter = colInfo.find(ID.ID);
-			
+
 			// 없다면 등록
 			if (iter == colInfo.end())
 			{
@@ -140,5 +140,18 @@ void CollisionManager::UpdateInternal(GROUP_TYPE left, GROUP_TYPE right)
 
 bool CollisionManager::IsCollided(Collider* left, Collider* right)
 {
+	Vec2 leftPos = left->GetFinalPos();
+	Vec2 leftScale = left->GetScale();
+
+	Vec2 rightPos = right->GetFinalPos();
+	Vec2 rightScale = right->GetScale();
+
+	// x 거리가 x 절반 크기를 더한 값보다 같거나 작다면 
+	if (abs(rightPos._x - leftPos._x) < (rightScale._x + leftScale._x) / 2.f
+		&& abs(rightPos._y - leftPos._y) < (rightScale._y + leftScale._y) / 2.f)
+	{
+		return true;
+	}
+
 	return false;
 }
