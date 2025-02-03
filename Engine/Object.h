@@ -28,7 +28,7 @@ public:
 private:
 	Collider* _collider = nullptr;
 
-private:
+protected:
 	Vec2 _pos;
 	Vec2 _scale;
 };

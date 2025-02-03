@@ -21,8 +21,14 @@ void Collider::UpdateLate()
 
 void Collider::Render(HDC dc)
 {
+	PEN_TYPE penType = PEN_TYPE::GREEN;
+	if (_isColliding)
+	{
+		penType = PEN_TYPE::RED;
+	}
+
 	// 소멸자에서 자동으로 반납하게 임시 객체 생성
-	SelectGDI t1(dc, PEN_TYPE::GREEN);
+	SelectGDI t1(dc, penType); 
 	SelectGDI t2(dc, BRUSH_TYPE::HOLLOW);
 
 	Rectangle(dc
@@ -39,8 +45,10 @@ void Collider::OnCollision(Collider* other)
 
 void Collider::OnCollisionEnter(Collider* other)
 {
+	++_isColliding;
 }
 
 void Collider::OnCollisionEnd(Collider* other)
 {
+	--_isColliding;
 }

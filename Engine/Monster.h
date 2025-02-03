@@ -6,25 +6,23 @@ class Monster : public Object
 public:
 	Monster();
 
-private:
-	Vec2 _centerPos = Vec2{ 0, 0 };
-	float speed = 100.f;
-	float maxDistance = 50.f;
-	int dir = 1; // 1 -1
-
 public:
-	float GetSpeed(){ return speed; }
+	float GetSpeed(){ return _speed; }
 	void SetSpeed(float speed) { speed = speed; }
-
-	void SetCenterPos(Vec2 pos) { _centerPos = pos;}
-	float GetMaxDixtance() { return maxDistance; }
-	void SetMaxDixtance(float dist) { maxDistance = dist; }
+	float GetMaxDixtance() { return _maxDistance; }
+	void SetMaxDixtance(float dist) { _maxDistance = dist; }
 	
 
 public:
 	virtual void Update();
 	virtual void Render();
 
+private:
+	float _speed = 100.f;
+	float _maxDistance = 50.f;
+	
+	// 1 -1
+	int _dir = 1; 
 
 };
 
