@@ -77,3 +77,15 @@ void Object::RenderComponent(HDC dc)
 		_collider->Render(dc);
 	}
 }
+
+void Object::OnCollision(Collider* other)
+{
+}
+
+void Object::OnCollisionBegin(Collider* other)
+{
+}
+
+void Object::OnCollisionEnd(Collider* other)
+{
+}
