@@ -16,6 +16,11 @@ public:
 	void RenderComponent(HDC dc);
 
 public:
+	virtual void OnCollision(Collider* other);
+	virtual void OnCollisionBegin(Collider* other);
+	virtual void OnCollisionEnd(Collider* other);
+
+public:
 	void SetPos(Vec2 pos);
 	void SetScale(Vec2 scale);
 	Vec2 GetPos();

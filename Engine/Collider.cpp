@@ -40,15 +40,17 @@ void Collider::Render(HDC dc)
 
 void Collider::OnCollision(Collider* other)
 {
-	
+	_owner->OnCollision(other);
 }
 
-void Collider::OnCollisionEnter(Collider* other)
+void Collider::OnCollisionBegin(Collider* other)
 {
 	++_isColliding;
+	_owner->OnCollisionBegin(other);
 }
 
 void Collider::OnCollisionEnd(Collider* other)
 {
 	--_isColliding;
+	_owner->OnCollisionEnd(other);
 }

@@ -24,7 +24,7 @@ public:
 	// 충돌 중인 상태
 	void OnCollision(Collider* other);
 
-	void OnCollisionEnter(Collider* other);
+	void OnCollisionBegin(Collider* other);
 
 	void OnCollisionEnd(Collider* other);
 
