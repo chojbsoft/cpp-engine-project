@@ -29,25 +29,21 @@ Core::~Core()
 	}
 }
 
-int Core::Init(HWND hWnd, POINT ptResolution)
+int Core::Init(HWND wnd, POINT resolution)
 {
-	this->_wnd = hWnd;
-	this->_resolution = ptResolution;
+	this->_wnd = wnd;
+	this->_resolution = resolution;
 
-	RECT rt{ 0, 0, ptResolution.x, ptResolution.y };
+	RECT rt{ 0, 0, resolution.x, resolution.y };
 	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, true);
-	SetWindowPos(hWnd, nullptr, 0, 0
-		, rt.right - rt.left, rt.bottom - rt.top, 0);
+	SetWindowPos(wnd, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, 0);
 
-	_dc = GetDC(hWnd);
-
-	_bitmap = CreateCompatibleBitmap(_dc, ptResolution.x, ptResolution.y);
+	_dc = GetDC(wnd);
+	_bitmap = CreateCompatibleBitmap(_dc, resolution.x, resolution.y);
 	_memDC = CreateCompatibleDC(_dc);
 
 	HGDIOBJ hOldBit = SelectObject(_memDC, _bitmap);
 	DeleteObject(hOldBit);
-	
-	// 자주 사용하는 GDI 미리 생성
 	CreateBrushPen();
 
 	PathManager::GetInst()->Init();
@@ -55,25 +51,20 @@ int Core::Init(HWND hWnd, POINT ptResolution)
 	KeyManager::GetInst()->Init();
 	SceneManager::GetInst()->Init();
 
-
 	return S_OK;
 }
 
 void Core::Progress()
 {
-	// Update
 	TimeManager::GetInst()->Update();
 	KeyManager::GetInst()->Update();
 	SceneManager::GetInst()->Update();
 	SceneManager::GetInst()->UpdateLate();
 	CollisionManager::GetInst()->Update();
 
-	// Render
 	Rectangle(_memDC, -1, -1, _resolution.x + 1, _resolution.y + 1);
 	SceneManager::GetInst()->Render(_memDC);
 	BitBlt(_dc, 0, 0, _resolution.x, _resolution.y, _memDC, 0, 0, SRCCOPY);
-
-	//TimeManager::GetInst()->Render();
 }
 
 void Core::CreateBrushPen()
