@@ -19,8 +19,6 @@ void CollisionManager::Init()
 
 void CollisionManager::CheckGroup(GROUP_TYPE left, GROUP_TYPE right)
 {
-	// 더 작은 숫자를 행으로 접근하기
-	// 그래야 일관성 있게, 이차원 배열에서 반만 사용할 수 있음
 	UINT row = (UINT)left;
 	UINT col = (UINT)right;
 	if (row > col)
@@ -39,7 +37,6 @@ void CollisionManager::CheckGroup(GROUP_TYPE left, GROUP_TYPE right)
 		// 비트 켜기
 		_check[row] |= 1 << col;
 	}
-
 }
 
 void CollisionManager::Reset()
@@ -118,8 +115,8 @@ void CollisionManager::UpdateInternal(GROUP_TYPE left, GROUP_TYPE right)
 				// 새롭게 충돌
 				else
 				{
-					leftCollider->OnCollisionEnter(rightCollider);
-					rightCollider->OnCollisionEnter(leftCollider);
+					leftCollider->OnCollisionBegin(rightCollider);
+					rightCollider->OnCollisionBegin(leftCollider);
 					iter->second = true;
 				}
 			}

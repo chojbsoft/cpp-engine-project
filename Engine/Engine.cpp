@@ -44,7 +44,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	{
 		MessageBox(nullptr, L"Core Failed"
 			, L"ERROR", MB_OK);
-
 		return FALSE;
 	}
 
@@ -53,7 +52,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	MSG msg;
 
-	// Main message loop:
 	while (true)
 	{
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -62,14 +60,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			{
 				break;
 			}
-
 			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
 			{
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
 		}
-
 		else
 		{
 			Core::GetInst()->Progress();

@@ -61,10 +61,10 @@ public:
 public:
 	KEY_STATE GetKeyState(KEY eKey)
 	{
-		return _keys[(int)eKey]._state;
+		return _keyInfo[(int)eKey]._state;
 	}
 
 private:
-	vector<KeyInfo> _keys;
+	vector<KeyInfo> _keyInfo;
 };
 
