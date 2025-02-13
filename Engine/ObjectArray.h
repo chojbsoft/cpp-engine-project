@@ -67,34 +67,27 @@ public:
 	_CONSTEXPR20 ~Allocator() = default;
 	_CONSTEXPR20 Allocator& operator=(const Allocator&) = default;
 
-	template< class U >
-	_CONSTEXPR20 void destroy(U* p)
+
+	_Ty* allocate(const size_t count)
+	{
+		return (_Ty*)_objectArray.Malloc(_typeInfo);
+	}
+
+	template <class _Objty, class... _Types>
+	void construct(_Objty* const ptr, _Types&&... args)
+	{
+		new(ptr)_Objty(std::forward<_Types>(args)...);
+	}
+
+	template<class U>
+	void destroy(U* p)
 	{
 		p->~U();
 	}
 
-
-	_CONSTEXPR20 void deallocate(_Ty* const _Ptr, const size_t _Count)
+	void deallocate(_Ty* const ptr, const size_t count)
 	{
-		_STL_ASSERT(_Ptr != nullptr || _Count == 0, "null pointer cannot point to a block of non-zero size");
-		_STL_ASSERT(_Count == 1, "error");
-		// no overflow check on the following multiply; we assume _Allocate did that check
-		//_Deallocate<_New_alignof<_Ty>>(_Ptr, sizeof(_Ty) * _Count);
-
-		_objectArray.Free(_typeInfo, _Ptr);
-	}
-
-	_NODISCARD_RAW_PTR_ALLOC _CONSTEXPR20 __declspec(allocator) _Ty* allocate(_CRT_GUARDOVERFLOW const size_t /*_Count*/)
-	{
-		static_assert(sizeof(value_type) > 0, "value_type must be complete before calling allocate.");
-		_Ty* Pointer = (_Ty*)_objectArray.Malloc(_typeInfo);
-		return Pointer;
-	}
-
-	template <class _Objty, class... _Types>
-	_CXX17_DEPRECATE_OLD_ALLOCATOR_MEMBERS void construct(_Objty* const _Ptr, _Types&&... _Args)
-	{
-		new(_Ptr)_Objty(std::forward<_Types>(_Args)...);
+		_objectArray.Free(_typeInfo, ptr);
 	}
 
 public:
