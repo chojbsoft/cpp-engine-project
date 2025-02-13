@@ -17,7 +17,7 @@ void CollisionManager::Init()
 {
 }
 
-void CollisionManager::CheckGroup(GROUP_TYPE left, GROUP_TYPE right)
+void CollisionManager::CheckGroup(OBJECT_TYPE left, OBJECT_TYPE right)
 {
 	UINT row = (UINT)left;
 	UINT col = (UINT)right;
@@ -41,26 +41,26 @@ void CollisionManager::CheckGroup(GROUP_TYPE left, GROUP_TYPE right)
 
 void CollisionManager::Reset()
 {
-	memset(_check, 0, sizeof(UINT) * (UINT)GROUP_TYPE::END);
+	memset(_check, 0, sizeof(UINT) * (UINT)OBJECT_TYPE::END);
 }
 
 void CollisionManager::Update()
 {
 	// 활성화되어 있는 충돌 채널 확인
-	for (int i = 0; i < (int)GROUP_TYPE::END; ++i)
+	for (int i = 0; i < (int)OBJECT_TYPE::END; ++i)
 	{
 		// col은 항상 row보다 같거나 크게해서, 효율적으로
-		for (int j = i; j < (int)GROUP_TYPE::END; ++j)
+		for (int j = i; j < (int)OBJECT_TYPE::END; ++j)
 		{
 			if (_check[i] & (1 << j))
 			{
-				UpdateInternal((GROUP_TYPE)i, (GROUP_TYPE)j);
+				UpdateInternal((OBJECT_TYPE)i, (OBJECT_TYPE)j);
 			}
 		}
 	}
 }
 
-void CollisionManager::UpdateInternal(GROUP_TYPE left, GROUP_TYPE right)
+void CollisionManager::UpdateInternal(OBJECT_TYPE left, OBJECT_TYPE right)
 {
 	Scene* currScene = SceneManager::GetInst()->GetCurScene();
 

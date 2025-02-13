@@ -7,6 +7,7 @@
 #include "PathManager.h"
 #include "PathManager.h"
 #include "CollisionManager.h"
+#include "EventManager.h"
 
 Core::Core()
 	: _wnd(0)
@@ -65,6 +66,8 @@ void Core::Progress()
 	Rectangle(_memDC, -1, -1, _resolution.x + 1, _resolution.y + 1);
 	SceneManager::GetInst()->Render(_memDC);
 	BitBlt(_dc, 0, 0, _resolution.x, _resolution.y, _memDC, 0, 0, SRCCOPY);
+
+	EventManager::GetInst()->Update();
 }
 
 void Core::CreateBrushPen()

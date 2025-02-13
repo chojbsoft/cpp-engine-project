@@ -23,13 +23,13 @@ private:\
 #define KEY_AWAY(key) KEY_CHECK(key, KEY_STATE::AWAY)
 
 
-enum class GROUP_TYPE
+enum class OBJECT_TYPE
 {
 	DEFAULT,
 	PLAYER,
-	MISSILE,
 	MONSTER,
-
+	PROJ_PLAYER,
+	PROJ_MONSTER,
 
 
 	END = 32,

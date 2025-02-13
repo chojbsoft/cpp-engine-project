@@ -3,7 +3,7 @@
 
 void Scene::Update()
 {
-	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
+	for (UINT i = 0; i < (UINT)OBJECT_TYPE::END; ++i)
 	{
 		for (size_t j = 0; j < objs[i].size(); ++j)
 		{
@@ -14,7 +14,7 @@ void Scene::Update()
 
 void Scene::UpdateLate()
 {
-	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
+	for (UINT i = 0; i < (UINT)OBJECT_TYPE::END; ++i)
 	{
 		for (size_t j = 0; j < objs[i].size(); ++j)
 		{
@@ -25,7 +25,7 @@ void Scene::UpdateLate()
 
 void Scene::Render(HDC _dc)
 {
-	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
+	for (UINT i = 0; i < (UINT)OBJECT_TYPE::END; ++i)
 	{
 		for (size_t j = 0; j < objs[i].size(); ++j)
 		{
@@ -36,7 +36,7 @@ void Scene::Render(HDC _dc)
 
 Scene::Scene()
 {
-	for (UINT i = 0; i < (UINT)GROUP_TYPE::END; ++i)
+	for (UINT i = 0; i < (UINT)OBJECT_TYPE::END; ++i)
 	{
 		objs[i] = vector<shared_ptr<Object>>();
 	}

@@ -9,11 +9,11 @@ public:
 	virtual ~Scene();
 
 private:
-	vector<shared_ptr<Object>> objs[(UINT)GROUP_TYPE::END];
+	vector<shared_ptr<Object>> objs[(UINT)OBJECT_TYPE::END];
 	wstring strName;
 
 public:
-	void AddObject(shared_ptr<Object> obj, GROUP_TYPE type)
+	void AddObject(shared_ptr<Object> obj, OBJECT_TYPE type)
 	{
 		objs[(UINT)type].push_back(obj);
 	}
@@ -30,7 +30,7 @@ public:
 
 	}
 
-	const vector<shared_ptr<Object>>& GetGroupObject(GROUP_TYPE type)
+	const vector<shared_ptr<Object>>& GetGroupObject(OBJECT_TYPE type)
 	{
 		return objs[(UINT)type];
 	}
