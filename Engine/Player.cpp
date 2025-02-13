@@ -68,19 +68,18 @@ void Player::Render(HDC dc)
 
 void Player::CreateMissile()
 {
-    Vec2 vMissilePos = GetPos();
-    vMissilePos._y -= GetScale()._y / 2.f;
+	shared_ptr<Missile> missile = NewObject<Missile>();
 
-	shared_ptr<Missile> pMissile = NewObject<Missile>();
+    Vec2 missilePos = GetPos();
+    missilePos._y -= GetScale()._y / 2.f;
+    missile->SetPos(missilePos);
+    missile->SetScale(Vec2(25.f, 25.f));
+    missile->SetDir(PI);
+    missile->SetDir({ -1, -7 });
+	missile->CreateCollider(Vec2::Zero(), missile->GetScale());
 
-    pMissile->SetPos(vMissilePos);
-    pMissile->SetScale(Vec2(25.f, 25.f));
-    pMissile->SetDir(PI);
-
-    pMissile->SetDir({ -1, -7 });
-
-	pMissile->CreateCollider(Vec2::Zero(), pMissile->GetScale());
-
-    Scene* pCurScene = SceneManager::GetInst()->GetCurScene();
-    pCurScene->AddObject(pMissile, GROUP_TYPE::DEFAULT);
+	// 힙에 생성하고 주소 넘김
+	// Event 파라미터 크기인 8바이트에 맞추고, 이벤트매니저 Update까지 소멸되지 않게 하기 위해
+	shared_ptr<Object>* obj = new shared_ptr<Object>(missile);
+	CreateObject(obj, OBJECT_TYPE::PROJ_PLAYER);
 }

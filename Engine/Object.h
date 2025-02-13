@@ -28,14 +28,26 @@ public:
 	Collider* GetCollider();
 
 public:
+	bool IsDead() { return _isAlive; }
+
+public:
 	void CreateCollider(Vec2 offsetPos, Vec2 scale);
 
 private:
-	Collider* _collider = nullptr;
+	// EventManager만 처리할 수 있게
+	void SetDead() { _isAlive = false; }
+	friend class EventManager;
 
 protected:
 	Vec2 _pos;
 	Vec2 _scale;
+
+private:
+	bool _isAlive = true;
+
+private:
+	Collider* _collider = nullptr;
+
 };
 
 

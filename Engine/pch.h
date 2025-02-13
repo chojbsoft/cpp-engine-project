@@ -15,5 +15,6 @@ using namespace std;
 #include "define.h"
 #include "Struct.h"
 #include "Object.h"
+#include "Function.h"
 
 #pragma comment(lib, "Msimg32.lib")
