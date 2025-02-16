@@ -11,11 +11,13 @@ public:
 	void SetSpeed(float speed) { speed = speed; }
 	float GetMaxDixtance() { return _maxDistance; }
 	void SetMaxDixtance(float dist) { _maxDistance = dist; }
-	
+
+public:
+	virtual void OnCollisionBegin(Collider* other);
 
 public:
 	virtual void Update();
-	virtual void Render();
+	virtual void Render(HDC DC) override;
 
 private:
 	float _speed = 100.f;

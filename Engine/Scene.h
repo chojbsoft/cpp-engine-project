@@ -17,6 +17,13 @@ public:
 	{
 		objs[(UINT)type].push_back(obj);
 	}
+	void DeleteObject(shared_ptr<Object> obj, OBJECT_TYPE type)
+	{
+		// 배열에서 순서가 상관 없으니, back을 그자리에 넣고 pop_back
+		auto it = find(objs[(UINT)type].begin(), objs[(UINT)type].end(), obj);
+		*it = objs[(UINT)type].back();
+		objs[(UINT)type].pop_back();
+	}
 
 public:
 	void SetName(const wstring& strName)

@@ -24,19 +24,19 @@ void Player::Update()
 
 	if (KEY_HOLD(KEY::W))
 	{
-		pos._y -= 200.f * DT;
+		pos._y -= 500.f * DT;
 	}
 	if (KEY_HOLD(KEY::S))
 	{
-		pos._y += 200.f * DT;
+		pos._y += 500.f * DT;
 	}
 	if (KEY_HOLD(KEY::A))
 	{
-		pos._x -= 200.f * DT;
+		pos._x -= 500.f * DT;
 	}
 	if (KEY_HOLD(KEY::D))
 	{
-		pos._x += 200.f * DT;
+		pos._x += 500.f * DT;
 	}
 
 	if (KEY_TAP(KEY::SPACE))
@@ -77,9 +77,11 @@ void Player::CreateMissile()
     missile->SetDir(PI);
     missile->SetDir({ -1, -7 });
 	missile->CreateCollider(Vec2::Zero(), missile->GetScale());
+	missile->SetType(OBJECT_TYPE::PROJ_PLAYER);
 
 	// 힙에 생성하고 주소 넘김
 	// Event 파라미터 크기인 8바이트에 맞추고, 이벤트매니저 Update까지 소멸되지 않게 하기 위해
-	shared_ptr<Object>* obj = new shared_ptr<Object>(missile);
-	CreateObject(obj, OBJECT_TYPE::PROJ_PLAYER);
+	//shared_ptr<Object>* obj = new shared_ptr<Object>(missile);
+
+	CreateObject(missile, OBJECT_TYPE::PROJ_PLAYER);
 }

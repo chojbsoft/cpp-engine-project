@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "PathManager.h"
 #include "CollisionManager.h"
+#include "EventManager.h"
 
 
 void StartScene::Enter()
@@ -15,8 +16,9 @@ void StartScene::Enter()
 	player->SetPos({ 640, 384 });
 	player->SetScale({ 100, 100 });
 	player->CreateCollider(Vec2::Zero(), player->GetScale() / 2.0f);
+	player->SetType(OBJECT_TYPE::PLAYER);
 
-	AddObject(player, OBJECT_TYPE::PLAYER);
+	CreateObject(player, OBJECT_TYPE::PLAYER);
 
 	// 몬스터 배치
 	int cnt = 2;
@@ -35,11 +37,13 @@ void StartScene::Enter()
 		monster->SetScale({ objScale, objScale });
 		monster->SetMaxDixtance(dist);
 		monster->CreateCollider(Vec2::Zero(), monster->GetScale() / 2.0f);
+		monster->SetType(OBJECT_TYPE::MONSTER);
 
-		AddObject(monster, OBJECT_TYPE::MONSTER);
+		CreateObject(monster, OBJECT_TYPE::MONSTER);
 	}
 
 	CollisionManager::GetInst()->CheckGroup(OBJECT_TYPE::PLAYER, OBJECT_TYPE::MONSTER);
+	CollisionManager::GetInst()->CheckGroup(OBJECT_TYPE::PROJ_PLAYER, OBJECT_TYPE::MONSTER);
 }
 
 void StartScene::Exit()

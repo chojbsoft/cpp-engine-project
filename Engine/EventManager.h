@@ -9,6 +9,12 @@ struct Event
 	DWORD_PTR wParam;
 };
 
+// shared_ptr에 대응하기 위한 임시 구조체
+struct EventSharedObj : public Event
+{
+	shared_ptr<Object> sharedObj;
+};
+
 class EventManager
 {
 	SINGLE(EventManager)
@@ -17,13 +23,13 @@ public:
 	void Update();
 
 public:
-	void AddEvent(const Event& eve) { _events.push_back(eve); }
+	void AddEvent(const EventSharedObj& eve) { _events.push_back(eve); }
 
 private:
-	void Execute(const Event& eve);
+	void Execute(const EventSharedObj& eve);
 
 private:
-	vector<Event> _events;
+	vector<EventSharedObj> _events;
 	vector<shared_ptr<Object>> _deadObjs;
 };
 

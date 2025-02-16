@@ -3,7 +3,7 @@
 
 class Collider;
 
-class Object
+class Object : public std::enable_shared_from_this<Object>
 {
 public:
 	Object();
@@ -21,11 +21,16 @@ public:
 	virtual void OnCollisionEnd(Collider* other);
 
 public:
+	shared_ptr<Object> GetShared() { return shared_from_this(); }
+	OBJECT_TYPE GetType() { return _type; }
+
+public:
 	void SetPos(Vec2 pos);
 	void SetScale(Vec2 scale);
 	Vec2 GetPos();
 	Vec2 GetScale();
 	Collider* GetCollider();
+	void SetType(OBJECT_TYPE type) { _type = type; }
 
 public:
 	bool IsDead() { return _isAlive; }
@@ -47,7 +52,7 @@ private:
 
 private:
 	Collider* _collider = nullptr;
-
+	OBJECT_TYPE _type;
 };
 
 
