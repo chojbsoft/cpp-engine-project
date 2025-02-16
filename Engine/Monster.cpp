@@ -1,10 +1,20 @@
 #include "pch.h"
 #include "Monster.h"
 #include "TimeManager.h"
+#include "EventManager.h"
+#include "Collider.h"
 
 
 Monster::Monster()
 {
+}
+
+void Monster::OnCollisionBegin(Collider* other)
+{
+	if (other->GetOwner()->GetType() == OBJECT_TYPE::PROJ_PLAYER)
+	{
+		DestroyObject(GetShared(), GetType());
+	}
 }
 
 void Monster::Update()
@@ -22,8 +32,11 @@ void Monster::Update()
 	SetPos(vCurPos);
 }
 
-void Monster::Render()
+void Monster::Render(HDC DC)
 {
+	Object::Render(DC);
 
 }
+
+
 

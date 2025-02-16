@@ -3,8 +3,8 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
-EventManager::EventManager(){}
-EventManager::~EventManager(){}
+EventManager::EventManager() {}
+EventManager::~EventManager() {}
 
 void EventManager::Update()
 {
@@ -20,31 +20,27 @@ void EventManager::Update()
 	_events.clear();
 }
 
-void EventManager::Execute(const Event& eve)
+void EventManager::Execute(const EventSharedObj& eve)
 {
 	switch (eve.even)
 	{
 	case EVENT_TYPE::CREATE_OBJECT:
 	{
-		// lParam: shared_ptr<Object>*
-		// wParam: GROUP_TYPE
-		shared_ptr<Object>* obj = (shared_ptr<Object>*)eve.lParam;
-		OBJECT_TYPE type = (OBJECT_TYPE)eve.wParam;
-		SceneManager::GetInst()->GetCurScene()->AddObject(*obj, type);
-		delete obj;
+		SceneManager::GetInst()->GetCurScene()->AddObject(eve.sharedObj, (OBJECT_TYPE)eve.wParam);
 
 		break;
 	}
 	case EVENT_TYPE::DELETE_OBJECT:
-
+	{
 		// Dead 상태로 변경
 		// 삭제 
-		shared_ptr<Object>* deadObj = (shared_ptr<Object>*)(eve.lParam);
-		(*deadObj)->SetDead();
-		_deadObjs.push_back(*deadObj);
-		delete deadObj;
+		shared_ptr<Object> obj = ((EventSharedObj)eve).sharedObj;
+		obj->SetDead();
+		SceneManager::GetInst()->GetCurScene()->DeleteObject(eve.sharedObj, (OBJECT_TYPE)eve.wParam);
+		_deadObjs.push_back(obj);
 
 		break;
+	}
 	case EVENT_TYPE::SCENE_CHANGE:
 
 		break;
