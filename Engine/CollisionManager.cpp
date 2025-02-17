@@ -109,15 +109,29 @@ void CollisionManager::UpdateInternal(OBJECT_TYPE left, OBJECT_TYPE right)
 				// 이전에도 충돌
 				if (iter->second)
 				{
-					leftCollider->OnCollision(rightCollider);
-					rightCollider->OnCollision(leftCollider);
+					// Dead 대비
+					// 충돌로 인해 파괴 예정이라면, End로 마무리해줌
+					if (leftObjs[i]->IsDead() || rightObjs[i]->IsDead())
+					{
+						leftCollider->OnCollisionEnd(rightCollider);
+						rightCollider->OnCollisionEnd(leftCollider);
+					}
+					else
+					{
+						leftCollider->OnCollision(rightCollider);
+						rightCollider->OnCollision(leftCollider);
+					}
 				}
 				// 새롭게 충돌
 				else
 				{
-					leftCollider->OnCollisionBegin(rightCollider);
-					rightCollider->OnCollisionBegin(leftCollider);
-					iter->second = true;
+					// Dead 대비
+					if (!leftObjs[i]->IsDead() && !rightObjs[i]->IsDead())
+					{
+						leftCollider->OnCollisionBegin(rightCollider);
+						rightCollider->OnCollisionBegin(leftCollider);
+						iter->second = true;
+					}
 				}
 			}
 			// 현재 프레임 충돌 안함

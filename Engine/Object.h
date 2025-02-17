@@ -33,13 +33,17 @@ public:
 	void SetType(OBJECT_TYPE type) { _type = type; }
 
 public:
-	bool IsDead() { return _isAlive; }
+	bool IsDead() { return !_isAlive; }
 
 public:
 	void CreateCollider(Vec2 offsetPos, Vec2 scale);
 
 private:
-	// EventManager만 처리할 수 있게
+	// DestroyObject에서만
+	void SetPendingKill() { _isPendingKill = true; }
+	friend void DestroyObject(shared_ptr<Object> obj, OBJECT_TYPE type);
+
+	// EventManager만
 	void SetDead() { _isAlive = false; }
 	friend class EventManager;
 
@@ -48,6 +52,7 @@ protected:
 	Vec2 _scale;
 
 private:
+	bool _isPendingKill = false;
 	bool _isAlive = true;
 
 private:

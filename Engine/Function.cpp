@@ -15,6 +15,8 @@ void CreateObject(shared_ptr<Object> obj, OBJECT_TYPE type)
 
 void DestroyObject(shared_ptr<Object> obj, OBJECT_TYPE type)
 {
+	obj->SetPendingKill();
+
 	EventSharedObj eve;
 	eve.even = EVENT_TYPE::DELETE_OBJECT;
 	eve.wParam = (DWORD_PTR)type;

@@ -25,6 +25,13 @@ void TimeManager::Update()
 	_deltaTime = (_curCount.QuadPart - _prevCount.QuadPart) / (double)_frequency.QuadPart;
 	_prevCount = _curCount;
 
+#ifdef _DEBUG
+	if (_deltaTime > 1. / 60.)
+	{
+		_deltaTime = 1. / 60.;
+	}
+#endif
+
 	++_callCount;
 	_acc += _deltaTime;
 	if (_acc >= 1)
@@ -33,6 +40,7 @@ void TimeManager::Update()
 		_acc = 0;
 		_callCount = 0;
 	}
+
 }
 
 void TimeManager::Render()

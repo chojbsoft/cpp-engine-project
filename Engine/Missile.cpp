@@ -29,6 +29,7 @@ void Missile::Update()
 
 void Missile::Render(HDC _dc)
 {
+    Object::Render(_dc);
     Vec2 vPos = GetPos();
     Vec2 vScale = GetScale();
 
