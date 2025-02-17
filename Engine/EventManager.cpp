@@ -9,6 +9,10 @@ EventManager::~EventManager() {}
 void EventManager::Update()
 {
 	// 이전 프레임의 이벤트 처리에 등록해둔 dead obj 삭제
+	for (int i = 0; i < _deadObjs.size(); ++i)
+	{
+		SceneManager::GetInst()->GetCurScene()->DeleteObject(_deadObjs[i], _deadObjs[i]->GetType());
+	}
 	_deadObjs.clear();
 
 	// 이벤트 처리
@@ -32,11 +36,9 @@ void EventManager::Execute(const EventSharedObj& eve)
 	}
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
-		// Dead 상태로 변경
-		// 삭제 
+		// Kill Pending 상태로 만들기
 		shared_ptr<Object> obj = ((EventSharedObj)eve).sharedObj;
 		obj->SetDead();
-		SceneManager::GetInst()->GetCurScene()->DeleteObject(eve.sharedObj, (OBJECT_TYPE)eve.wParam);
 		_deadObjs.push_back(obj);
 
 		break;
