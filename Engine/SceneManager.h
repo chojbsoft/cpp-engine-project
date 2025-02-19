@@ -6,10 +6,6 @@ class SceneManager
 {
 	SINGLE(SceneManager);
 
-private:
-	Scene* _scenes[(UINT)SCENE_TYPE::END];
-	Scene* _curScene;
-
 public:
 	Scene* GetCurScene() { return _curScene; }
 
@@ -18,5 +14,14 @@ public:
 	void Update();
 	void UpdateLate();
 	void Render(HDC dc);
+
+private:
+	void ChangeScene(SCENE_TYPE next);
+	friend class EventManager;
+
+private:
+	Scene* _scenes[(UINT)SCENE_TYPE::END];
+	Scene* _curScene;
+
 };
 

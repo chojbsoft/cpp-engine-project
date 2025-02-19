@@ -24,7 +24,7 @@ void EventManager::Update()
 	_events.clear();
 }
 
-void EventManager::Execute(const EventSharedObj& eve)
+void EventManager::Execute(const Event& eve)
 {
 	switch (eve.even)
 	{
@@ -32,20 +32,22 @@ void EventManager::Execute(const EventSharedObj& eve)
 	{
 		SceneManager::GetInst()->GetCurScene()->AddObject(eve.sharedObj, (OBJECT_TYPE)eve.wParam);
 
-		break;
 	}
+	break;
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
 		// Kill Pending 상태로 만들기
-		shared_ptr<Object> obj = ((EventSharedObj)eve).sharedObj;
+		shared_ptr<Object> obj = eve.sharedObj;
 		obj->SetDead();
 		_deadObjs.push_back(obj);
 
-		break;
 	}
+	break;
 	case EVENT_TYPE::SCENE_CHANGE:
-
-		break;
+	{
+		SceneManager::GetInst()->ChangeScene((SCENE_TYPE)eve.lParam);
+	}
+	break;
 	}
 
 }
