@@ -7,6 +7,8 @@
 #include "PathManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "SceneManager.h"
+#include "KeyManager.h"
 
 
 void StartScene::Enter()
@@ -50,4 +52,15 @@ void StartScene::Exit()
 {
 	// 씬에서 지정되어 있던 충돌체 그룹 설정 해제
 	CollisionManager::GetInst()->Reset();
+	DeleteAll();
+}
+
+void StartScene::Update()
+{
+	Scene::Update();
+
+	if (KEY_TAP(KEY::ENTER))
+	{
+		ChangeScene(SCENE_TYPE::TOOL);
+	}
 }
