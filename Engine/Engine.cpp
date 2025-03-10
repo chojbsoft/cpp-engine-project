@@ -58,6 +58,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			if (msg.message == WM_QUIT)
 			{
+				logger.Exit();
 				break;
 			}
 			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))

@@ -8,6 +8,7 @@
 #include "PathManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "NetworkManager.h"
 
 Core::Core()
 	: _wnd(0)
@@ -51,6 +52,7 @@ int Core::Init(HWND wnd, POINT resolution)
 	TimeManager::GetInst()->Init();
 	KeyManager::GetInst()->Init();
 	SceneManager::GetInst()->Init();
+	NetworkManager::GetInst()->Init();
 
 	return S_OK;
 }
@@ -62,6 +64,7 @@ void Core::Progress()
 	SceneManager::GetInst()->Update();
 	SceneManager::GetInst()->UpdateLate();
 	CollisionManager::GetInst()->Update();
+	NetworkManager::GetInst()->Update();
 
 	Rectangle(_memDC, -1, -1, _resolution.x + 1, _resolution.y + 1);
 	SceneManager::GetInst()->Render(_memDC);
