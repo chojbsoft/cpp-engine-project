@@ -5,14 +5,12 @@
 
 void SceneManager::Init()
 {
-	// Scene »ı¼º
-	_scenes[(UINT)SCENE_TYPE::START] = new StartScene();
-	_scenes[(UINT)SCENE_TYPE::START]->SetName(L"Start Scene");
+	LOG(Info, "Init");
+	// ÇöÀç ¾À ÁöÁ¤
 	_scenes[(UINT)SCENE_TYPE::TOOL] = new ToolScene();
 	_scenes[(UINT)SCENE_TYPE::TOOL]->SetName(L"Tool Scene");
 
-	// ÇöÀç ¾À ÁöÁ¤
-	_curScene = _scenes[(UINT)SCENE_TYPE::START];
+	_curScene = _scenes[(UINT)SCENE_TYPE::TOOL];
 	_curScene->Enter();
 }
 
