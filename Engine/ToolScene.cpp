@@ -13,11 +13,6 @@ void ToolScene::Exit()
 void ToolScene::Update()
 {
 	Scene::Update();
-
-	if (KEY_TAP(KEY::ENTER))
-	{
-		ChangeScene(SCENE_TYPE::START);
-	}
 }
 
 void ToolScene::Render(HDC _dc)
